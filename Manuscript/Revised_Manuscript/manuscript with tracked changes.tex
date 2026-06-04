@@ -1,0 +1,971 @@
+%% 
+%% Copyright 2007-2025 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.3 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%% $Id: elsarticle-template-num.tex 272 2025-01-09 17:36:26Z rishi $
+%%
+\documentclass[preprint,12pt,authoryear]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+%% The amsmath package provides various useful equation environments.
+\usepackage{amsmath}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}    
+\usepackage{caption}  
+\usepackage[labelsep=period]{caption}
+\renewcommand{\figurename}{Fig.}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage[markup=underlined,draft]{changes}
+% \usepackage[final]{changes}
+
+
+\journal{Journal of Applied Geophysics}
+\begin{document}
+\begin{frontmatter}
+
+%% Title, authors and addresses
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \affiliation for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%% \title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%% \author{Name\corref{cor1}\fnref{label2}}
+%% \ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%% \cortext[cor1]{}
+%% \affiliation{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%% \fntext[label3]{}
+
+\title{U-Net3+ With Full-Scale Fusion and Deep Supervision for Seismic Noise Suppression}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{}
+%% \affiliation[label1]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%
+%% \affiliation[label2]{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+
+\author[label1]{Wei Wang} %% Author name
+\author[label2]{Zhiyuan Gu} %% Author name
+\author[label3]{Qianggong Song} %% Author name
+\author[label1]{Hanming Gu} %% Author name
+
+
+%% Author affiliation
+\affiliation[label1]{organization={the College for Elite Engineers, China University of Geosciences, Wuhan},%Department and Organization
+            addressline={No. 388, Lumo Road, Hongshan District}, 
+            city={Wuhan},
+            postcode={430074}, 
+            state={Hubei},
+            country={China}}
+            
+\affiliation[label2]{organization={Changjiang Geophysical Exploration and Testing Company Ltd.},%Department and Organization
+            addressline={No. 1863, Jiefang Avenue, 24-1 Building, Jiang'an District}, 
+            city={Wuhan},
+            postcode={430010}, 
+            state={Hubei},
+            country={China}}
+
+\affiliation[label3]{organization={National Engineering Research Center of Oil and Gas Exploration Computer Software, BGP Inc., CNPC},%Department and Organization
+            addressline={No. 189, Fanyang West Road}, 
+            city={Zhuozhou},
+            postcode={072751}, 
+            state={Hebei},
+            country={China}}
+            
+%% Abstract
+\begin{abstract}
+%% Text of abstract
+Field-acquired seismic data contain inherent random noise, which challenges subsequent data processing and interpretation. This noise is non-stationary, broadband, and time-varying. Conventional denoising methods often rely on manually defined thresholds and exhibit limited efficacy in suppressing noise overlapping with the signal bandwidth. In contrast, deep learning-based methods are data-driven and learn the spatial, temporal, and frequency characteristics of seismic data. These methods map noise and useful signals into distinct high-dimensional spaces, overcoming the limitations of traditional approaches, especially in handling overlapping frequencies and non-stationary noise, thus improving the signal-to-noise ratio (SNR) and resolution. U-Net-based networks have shown promising results in seismic denoising tasks. However, conventional U-Net architectures limit the fusion of multi-scale features and adaptation to complex geological structures or low-SNR data. To address these, this paper proposes a seismic noise suppression method using U-Net3+, which incorporates full-scale feature fusion and deep supervision, improving the network's ability to understand multi-scale features and detect spatial noise patterns. Both synthetic and field seismic datasets validate the model, demonstrating superior denoising performance compared to multichannel singular spectrum analysis (MSSA) and conventional U-Net.
+\end{abstract}
+
+% %%Graphical abstract
+% \begin{graphicalabstract}
+% %\includegraphics{grabs}
+% \end{graphicalabstract}
+
+%%Research highlights
+\begin{highlights}
+    \item A full-scale feature fusion module is designed to comprehensively integrate multi-scale representations, thereby enhancing the network's capacity to capture the spatial distribution characteristics of random noise and improving its robustness in the denoising process.
+    \item Deep supervision is implemented by introducing auxiliary loss functions at the output of each decoder scale, which effectively enhances the learning efficiency and the ability of the network to preserve weak signals under low signal-to-noise ratio conditions.
+    \item Unlike the high-frequency random noise typically adopted in previous studies, the noise added to the seismic records in this study spans the effective frequency band of the seismic signal. This noise construction strategy better reflects the characteristics of real observational noise in complex geological settings and imposes stricter requirements for evaluating the denoising performance.
+\end{highlights}
+
+
+%% Keywords
+\begin{keyword}
+%% keywords here, in the form: keyword \sep keyword
+%% PACS codes here, in the form: \PACS code \sep code
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+Seismic Denoising, Deep Learning, U-Net Network, Random Noise
+\end{keyword}
+
+\end{frontmatter}
+
+%% Add \usepackage{lineno} before \begin{document} and uncomment 
+%% following line to enable line numbers
+%% \linenumbers
+
+%% main text
+%%
+
+%% Use \section commands to start a section
+\section{Introduction}
+\label{sec1}
+%% Labels are used to cross-reference an item using \ref command.
+During field seismic data acquisition, random and high-amplitude noise are introduced due to human activities, complex geological conditions, and environmental interference. 
+These types of noise \replaced{significantly degrade}{reduce} the signal-to-noise ratio (SNR) and adversely affect subsequent data processing and interpretation. To improve data quality, it is essential to perform noise suppression and data reconstruction at an early stage. With advances in petroleum exploration technologies, achieving high SNR, resolution, and fidelity has become \replaced{crucial}{critical} to enhancing the accuracy of seismic data processing and interpretation. Therefore, developing efficient denoising and reconstruction algorithms is of \replaced{vital importance}{great significance} for improving the precision of seismic data processing.
+Conventional seismic denoising methods are based on specific assumptions to separate useful signals from noise. 
+These include filtering-based, transform-based, and low-rank approximation approaches. 
+Filtering-based methods apply various filters to suppress noise, such as median filtering, Gaussian filtering, adaptive filtering, and non-local means filtering \citep{bednar1983median,cao2018adaptive,wu2011radial,buades2008nonlocal}. 
+These methods typically rely on differences between signal and noise in either the frequency or spatial domain, but they \replaced{often lack flexibility}{lack flexibility}, \replaced{may degrade}{often degrade} useful signals, and struggle with complex or overlapping noise. Transform-based methods include the Fourier transform, wavelet transform \citep{xia1994wavelet}, S-transform, curvelet transform, and Seislet transform, as well as various enhanced techniques derived from these methods \citep{zhang2019curvelet,xia1994wavelet,pinnegar2003stransform,li2020surfacewave,fomel2006seislet, liu2009seislet}.
+\added{%
+\protect\citeauthor{tan2023sstdiffusion} (\protect\citeyear{tan2023sstdiffusion}) proposed a seismic signal denoising method based on the generalized S-transform and nonlinear complex diffusion, which effectively suppresses noise and enhances useful signals through frequency decomposition, adaptive diffusion, and signal reconstruction, demonstrating superior denoising performance on low signal-to-noise ratio seismic data. 
+\protect\citeauthor{shan2009waveletcomparison} (\protect\citeyear{shan2009waveletcomparison}) achieved effective suppression of random noise while preserving seismic structural features by constructing a joint optimization model of wavelets and curvelets.%
+}
+These methods assume signal sparsity in specific transform domains, require \replaced{empirical}{experience-based} parameter tuning, and are \replaced{often computationally demanding}{computationally intensive}, with limited adaptability to nonlinear or nonstationary noise, making them less effective for complex seismic data. 
+Seismic data often exhibit strong temporal and spatial correlations. 
+Ideally, noise-free and complete seismic sections can be represented by low-rank matrices, while noise or missing traces \replaced{lead to an increase in}{increase} the matrix rank. 
+singular spectrum analysis \deleted{(SSA)} is a classic low-rank approximation technique that denoises data by applying rank reduction to Hankel matrices constructed from seismic frequency slices \citep{chen2015robust}.
+\added{%
+Building upon this foundation, researchers have proposed various enhanced low-rank methods to improve both denoising performance and computational efficiency. 
+\protect\citeauthor{bayati2023adaptive} (\protect\citeyear{bayati2023adaptive}) introduced an Adaptive Weighted Rank Reduction approach, which adaptively selects the optimal rank within each local window and incorporates a weighting operator to suppress noise projections, thereby achieving more robust simultaneous denoising and interpolation in complex seismic datasets. 
+\protect\citeauthor{liu2025wmssa} (\protect\citeyear{liu2025wmssa}) proposed a weighted multichannel singular spectrum analysis algorithm that integrates a weighting strategy into the singular value reconstruction to preserve the dynamic characteristics of diffracted waves, effectively suppress strong reflections while maintaining the amplitude separation of diffracted waves, thus enhancing the accuracy and stability of imaging complex small-scale structures. 
+\protect\citeauthor{wang2020lowrank} (\protect\citeyear{wang2020lowrank}) developed an optimal rank selection criterion based on singular value distribution characteristics, which adaptively determines the rank of local windows through statistical analysis, balancing automatic noise suppression with the preservation of seismic event features in low-rank approximation denoising. 
+\protect\citeauthor{yang2024symplectic} (\protect\citeyear{yang2024symplectic}) proposed an adaptive low-rank denoising method based on symplectic geometric decomposition, which employs symplectic geometric entropy to automatically select the rank and avoid singular value decomposition, significantly improving computational efficiency and denoising performance for complex structures while preserving signal features.%
+}
+
+However, the resulting block Hankel matrices are substantially larger than the frequency slices themselves, leading to high computational costs and increased memory requirements \citep{cui2023deeplearning}.
+ 
+In recent years, with \added{the} rapid advancements in computer hardware and the development of artificial neural networks, deep learning has been widely integrated into various aspects of modern society. In seismic exploration, deep learning techniques have been applied to multiple tasks, including seismic data processing, waveform classification, velocity model building, seismic interpretation, and reservoir prediction \citep{zhang2024gan}. Owing to their powerful feature extraction and nonlinear modeling capabilities, deep learning--based denoising methods have \replaced{exhibited}{demonstrated} remarkable advantages in complex noise environments. These methods can generally be categorized into supervised learning and unsupervised learning. Supervised approaches, such as CNN, DnCNN, and U-Net, learn a mapping between noisy and clean data using convolutional neural networks \citep{yu2019deeplearning, zhang2017residualcnn, chai2021deep}. Inspired by the projection onto convex sets (POCS) method based on compressive sensing theory, \citet{ou2023hubernet} replaced the conventional L2 loss with a Huber loss constraint in the U-Net framework, developing a Huber-U-Net model for seismic data reconstruction and denoising. Their results \replaced{indicated}{showed} improved performance over both the original POCS and the standard U-Net. \citet{fan2023dcnn} enhanced DnCNN by introducing asymmetric convolutional blocks in place of standard square kernels, which improved feature extraction and achieved effective suppression of abnormal amplitudes. \citet{cao2024attentionunet} proposed an attention-augmented U-Net by incorporating an attention module \deleted{(AM)} and using dilated padding to mitigate boundary artifacts during patch-wise processing. Their method demonstrated good denoising performance on seismic data. \citet{wu2022waveletresidual} combined stationary wavelet transforms with deep residual networks for multichannel joint denoising. Unsupervised methods can be divided into three main categories. The first category includes autoencoder-based methods, such as sparse autoencoders, denoising autoencoders, and variational autoencoders \deleted{(SAE, DAE, VAE)} \citep{vincent2010stacked}. The second category is based on the deep image prior (DIP). \citet{lempitsky2018deep} \replaced{identified}{discovered} an implicit prior inherent in neural networks: low impedance to natural signals and high impedance to noise. This prior has \replaced{been validated to be}{proven} effective in denoising, super-resolution, and image inpainting tasks. \citet{wang2023wtvadmm} extended the DIP framework by introducing a residual structure, incorporating a weighted total variation \deleted{(WTV)} regularization term in the loss function, and \replaced{adopting}{using} the alternating direction method of multipliers \deleted{(ADMM)} for optimization. Experiments demonstrated that this method improves stability compared to conventional DIP, with smaller SNR fluctuations between iterations and \replaced{more effective}{better} early stopping criteria.
+\added{%
+\protect\citeauthor{gao2024complementarymask}(\protect\citeyear{gao2024complementarymask}) proposed a complementary mask-based blind-spot unsupervised learning framework, which leverages the Splitter-Splicer architecture and a novel blind-spot loss function to fully exploit the entire dataset and incorporate attention mechanisms, effectively enhancing the fidelity of weak reflection signals and the continuity of seismic events.%
+}
+The third category is self-supervised learning\deleted{(SSL)}, which constructs pseudo-labels from unlabeled data to enable supervised training. \citet{cheng2024selfsupervised} proposed a self-supervised denoising method based on iterative learning for attenuating noise. Experimental results show that their approach outperforms conventional self-supervised techniques.
+
+U-Net, a convolutional neural network proposed by \citet{Ronneberger2015}, was originally designed for biomedical image segmentation. By introducing skip connections, U-Net effectively integrates global and local features, enabling its successful extension to diverse domains. Since then, U-Net has been successfully applied to various domains, including seismic data denoising. However, the conventional U-Net architecture connects the encoder and decoder layers directly, limiting its ability to efficiently fuse multi-scale features and reducing its adaptability to complex structures and low SNR data. Inspired by U-Net++ \citep{zhou2020unetplusplus}, U-Net3+ was developed by \citet{huang2020unet3plus}. It incorporates full-scale feature fusion modules that aggregate features from all encoder layers, thereby capturing contextual information across multiple resolutions. This design enhances the network's adaptability to complex geological structures. Furthermore, U-Net3+ introduces deep supervision to all decoder outputs by adding auxiliary losses at multiple scales, improving its performance on low-SNR data.
+\added{ During the construction of training samples, the synthetic noise was deliberately designed to overlap with the effective seismic signals in the frequency domain, reflecting the characteristics of real seismic data where noise components often share overlapping frequency bands with useful reflections. This design incorporates geophysical prior knowledge into the data generation process, allowing the network to distinguish between signal and noise based on spatial and structural coherence rather than simple spectral separation.}
+In this work, we apply U-Net3+ to the task of seismic random noise suppression by leveraging its full-scale feature fusion and deep supervision mechanisms. We conduct denoising experiments on both synthetic and field seismic records and compare the results with \deleted{those of} the conventional U-Net and multichannel singular spectrum analysis (MSSA) methods. Experimental results demonstrate that U-Net3+ achieves superior denoising performance.
+
+\section{Method}
+\label{sec2}
+\subsection{Architecture of the U-Net3+}
+\label{subsec1}
+
+U-Net integrates shallow, low-level, fine-grained feature maps from the encoder with deep, high-level, coarse-grained feature maps from the decoder through skip connections, compensating for the information loss that occurs during the upsampling process in the decoder. However, in the original U-Net, the skip connections directly link encoder and decoder layers, which leads to inefficient feature fusion due to the large semantic gap between shallow and deep layers. As a result, a significant amount of random noise from shallow layers can be propagated directly to the decoder, affecting the denoising performance. Meanwhile, deep features often lose fine-scale information due to multiple down-sampling operations, making it difficult to fully reconstruct weak signals during decoding. This can lead to over-smoothing and attenuation of useful signals.To overcome these limitations, U-Net3+ introduces a full-scale feature fusion module, which employs full-scale skip connections to aggregate multi-scale features from both encoder and decoder layers at each decoding stage. This comprehensive integration of multi-scale information enhances the network's ability to recognize spatial noise distribution patterns, thus improving robustness in the noise suppression process. Furthermore, U-Net3+ incorporates a deep supervision mechanism by applying auxiliary loss functions to the outputs of all decoder stages. This improves the learning efficiency and weak-signal preservation capability under low SNR conditions. \replaced{In contrast}{As opposed to that}, the conventional U-Net applies supervision only at the final output, which often results in detail loss or over-smoothing.In summary, compared with the original U-Net, U-Net3+ achieves a better balance between noise suppression and signal preservation. It offers higher signal fidelity, adaptability, and generalization ability when dealing with strong random noise and complex seismic data. Therefore, this study proposes to apply U-Net3+, equipped with full-scale feature fusion and deep supervision, to the task of seismic random noise suppression.
+
+As shown in Fig.~\ref{Fig. 1}, the U-Net3+ network architecture can be divided into three parts: the encoder, the decoder, and the cross-scale feature fusion mechanism between them. Each decoder layer integrates small-scale and same-scale feature maps from the encoder, as well as large-scale feature maps from the decoder.
+
+\begin{figure}[t] % 
+    \centering % 
+    \includegraphics[width=0.8\textwidth]{Figure1.jpg} % 
+    \caption{Architecture of the U-Net3+ network.} % 
+    \label{Fig. 1} % 
+\end{figure}
+
+As shown in Fig.~\ref{Fig. 2}, for example, the decoder layer $X_{D_e}^{3}$ directly receives the feature map $X_{E_e}^{3}$ from the encoder layer at the same scale, similar to that of the original U-Net. The low-scale encoder features $X_{E_e}^{3}$ and $X_{E_e}^{2}$ are processed by a max-pooling layer before being fed into the decoder, while the high-scale encoder features $X_{E_e}^{4}$ and $X_{E_e}^{5}$ are upsampled via bilinear interpolation before being delivered to the decoder layer.
+
+\begin{figure}[t] % 
+    \centering % 
+    \includegraphics[width=0.8\textwidth]{Figure2.jpg} % 
+    \caption{Full-scale fusion module.} % 
+    \label{Fig. 2} % 
+\end{figure}
+
+As a result, five feature maps with the same spatial resolution are obtained. To reduce redundancy, the number of channels is unified using 64 convolution kernels of size $3 \times 3$. This is followed by another $3 \times 3$ convolution layer, batch normalization, and a ReLU activation function. The entire process can be mathematically expressed as follows:
+
+\begin{equation}
+X_{D_e}^{i} = 
+\begin{cases}
+X_{E_n}^{i}, & i = N \\
+\mathcal{H}\left( \left[ 
+\underbrace{\mathcal{C}\left(\mathcal{D}\left(X_{E_n}^{k}\right)\right)_{k=1}^{i-1},\ \mathcal{C}\left(X_{E_n}^{i}\right)}_{\text{Scales: } 1^{\text{th}} \sim i^{\text{th}}},\ 
+\underbrace{\mathcal{C}\left(U\left(X_{D_e}^{k}\right)\right)_{k=i+1}^{N}}_{\text{Scales: } (i+1)^{\text{th}} \sim N^{\text{th}}}
+\right] \right), & i = 1, \cdots, N-1
+\end{cases}
+\end{equation}
+
+In this context, $\mathcal{C} (\cdot)$ represents the convolution operation, and $\mathcal{H} (\cdot)$ refers to the operation after convolution, followed by batch normalization and the ReLU activation function. $\mathcal{D} (\cdot)$ and $U (\cdot)$ denote down-sampling and up-sampling operations, respectively. $[\cdot]$ indicates concatenation along the channel dimension. The U-Net3+ network utilizes full-scale feature fusion for seismic data denoising, allowing for the simultaneous recovery of large-scale geological structure information and small-scale detail features, thus improving the resolution and SNR of the seismic records.
+
+Field-acquired seismic records can be expressed as:
+\begin{equation}
+y = s + n
+\end{equation}
+
+Where $y$ denotes the observed seismic data, $s$ is the clean signal without noise, and $n$ represents the random noise component. Therefore, the goal of random noise suppression is to recover $s$ from $y$, which can be formulated as a mapping:
+\begin{equation}
+s = h(y)
+\end{equation}
+
+Where $h(\cdot)$ denotes the mapping from noisy seismic data to denoised data. Deep-learning-based methods aim to approximate this mapping by training neural networks on a large number of data samples, thereby achieving effective random noise suppression.
+
+In conventional neural networks, typically only the final layer (i.e., the output layer) is used to compute the loss and perform backpropagation. The loss function employed in the conventional U-Net is a mean squared error function, which minimizes the L2-norm-based constraint between the network's final output and the ground truth:
+\begin{equation}
+L(\theta) = \frac{1}{N} \sum_{i=1}^{N} \left\| H(y_i; \theta) - s \right\|_2^2
+\end{equation}
+
+Here, $H (\cdot)$ denotes the output of the network given a noisy seismic input. Specifically, $y$ is the observed seismic record, and $s$ represents the clean seismic signal without noise. Deep supervision computes losses at multiple levels within the network and performs backpropagation accordingly, as illustrated in Fig.~\ref{Fig. 3}. This allows feature representations at each layer to receive feedback earlier in the training process, thereby accelerating convergence---especially in deeper architectures. In practice, deep supervision is typically implemented by adding auxiliary loss functions to intermediate layers of the network, such as certain convolution or up-sampling layers, to guide feature learning. U-Net3+ generates outputs from each decoder layer and compares them with the ground truth. To address the mismatch in spatial resolution across decoder layers, each decoder output is first passed through a 3$\times$3 convolution, followed by bilinear interpolation for up-sampling, and then through a sigmoid activation function. The deep supervision loss function can be expressed as:
+
+\begin{equation} \label{eq:weighted_mse}
+L(\theta) = \frac{1}{N} \sum_{i=1}^{N} \sum_{j=1}^{M} \omega_{j} \left\| H\left(y_{ij}; \theta\right) - s \right\|_{2}^{2}
+\end{equation}
+
+Here, $N$ denotes the number of training samples, $M$ represents the number of network layers involved in deep supervision, $y_{ij}$ is the output feature of the $i$-th training sample at the $j$-th layer, and $\omega_j$ denotes the loss weight assigned to the $j$-th layer. Full-scale deep supervision helps alleviate the vanishing gradient problem and improves training stability. Enforcing learning capability in intermediate layers enhances the feature representation of the model, accelerates convergence, and reduces training costs.
+
+
+\begin{figure}[t] % 
+    \centering % 
+    \includegraphics[width=0.8\textwidth]{Figure3.jpg} % 
+    \caption{Full-scale deep supervision.} % 
+    \label{Fig. 3} % 
+\end{figure}
+
+
+%% Use \subsubsection, \paragraph, \subparagraph commands to 
+%% start 3rd, 4th and 5th level sections.
+%% Refer following link for more details.
+%% https://en.wikibooks.org/wiki/LaTeX/Document_Structure#Sectioning_commands
+
+\subsection{Sample Generation Strategy}
+In the task of seismic data random noise removal, the most challenging \replaced{type}{noise to remove} is the random noise that overlaps with the frequency band of the \replaced{effective seismic signal}{true seismic record}. The difficulty in processing this type of noise arises from its high coupling with the effective seismic reflection signal in the frequency domain: when the energy distribution of the random noise significantly overlaps with the inherent frequency band of the true seismic record, traditional frequency-domain filtering methods (such as wavelet thresholding denoising, F-K filtering) struggle to maintain a balance between signal fidelity and noise suppression. Therefore, this paper introduces random noise that overlaps with the effective seismic record's frequency band range into the clean seismic data samples to enhance the network's adaptability to noise from different frequency bands. The specific approach is as follows:
+
+\begin{enumerate}
+    \item Generate Gaussian noise across the full frequency band.
+    \item Apply band-pass filtering to the full-frequency Gaussian noise based on the spectral characteristics of the effective seismic data.
+    \item Feed the samples with added noise from different frequency bands into the network for training.
+\end{enumerate}
+
+The level of added noise is controlled by adjusting the standard deviation of the Gaussian random noise. The Gaussian noise follows a normal distribution:
+
+\begin{equation}
+n \sim \mathcal{N}(\mu, \sigma_{n}^{2})
+\end{equation}
+
+Where $\mu$ is the mean and $\sigma_n$ is the standard deviation. The standard deviation here is determined based on the standard deviation of the original data and the noise level coefficient.
+
+\begin{equation}
+\sigma_{n} = k \cdot \sigma_{x}
+\end{equation}
+
+Where $k$ is the noise level coefficient and $\sigma_x$ is the standard deviation of the clean data. In this paper, the intensity of the added random noise is controlled by varying the size of the noise level coefficient $k$.
+
+\subsection{Evaluation Metrics}
+Generally, the performance of deep learning networks in denoising is measured by metrics such as SNR, peak signal-to-noise ratio (PSNR), and structural similarity index measure (SSIM). Their specific physical meanings are as follows:
+
+1) SNR:
+\begin{equation}
+SNR = 10 \lg \frac{\|s\|^{2}}{\|s - H\|^{2}} \tag{9}
+\end{equation}
+
+Where $H$ denotes the denoised output of the network, and $s$ represents the noise-free seismic data. The SNR metric characterizes the overall energy ratio between the signal and the noise, providing a quantitative measure of the preservation of effective signal components after the denoising process.
+
+2) PSNR:
+\begin{equation}
+PSNR = 10 \lg \frac{\max\|s\|^{2} \cdot N_s}{\|s - H\|^{2}} \tag{10}
+\end{equation}
+
+Where $H$ also denotes the output after denoising by the network, and $N_s$ is the number of sample points in the seismic data. The PSNR extends the SNR metric by normalizing the reconstruction error with respect to the peak signal energy. This metric provides a standardized means of evaluation for datasets with varying dimensions or dynamic ranges, for instance, when the energy of seismic sources differs across locations.
+
+3) SSIM:
+\begin{equation}
+SSIM = \frac{(2\mu_{x}\mu_{y} + C_{1})(2\sigma_{xy} + C_{2})}{(\mu_{x}^{2} + \mu_{y}^{2} + C_{1})(\sigma_{x}^{2} + \sigma_{y}^{2} + C_{2})} \tag{11}
+\end{equation}
+
+Where $x$ and $y$ represent two images, $\mu$ denotes the mean (brightness) of the images, $\sigma$ denotes the variance (contrast), $\sigma_{xy}$ is the covariance between the two images (structural correlation), and $C_1$ and $C_2$ are constants typically taken as $C_1 = (0.01L)^2$ and $C_2 = (0.03L)^2$, where $L$ is the pixel dynamic range. The SSIM value ranges from 0 to 1, where 1 indicates perfect similarity. It evaluates signal fidelity based on brightness, contrast, and structural similarity, and is sensitive to the continuity of seismic isochrons (reflective waves of stratigraphic interfaces) and the phase consistency of waveforms, making it effective in detecting damage to geological structures by algorithms.
+
+\section{Experiments}
+\label{sec3}
+\subsection{Experiments on Synthetic Seismic Data}
+The denoising performance of the U-Net3+ method was evaluated on the open-source Marmousi synthetic seismic model \citep{martin2005marmousi2}. As shown in Fig.~\ref{Fig. 4}, this model contains a total of 2721 traces, with a sampling interval of 4 ms and a dominant frequency of 45 Hz.
+\begin{figure}[t] % 
+    \centering % 
+    \includegraphics[width=0.8\textwidth]{Figure4.pdf} % 
+    \caption{Synthetic Seismic Data.} % 
+    \label{Fig. 4} % 
+\end{figure}
+The first 2000 traces were split into a training set and a validation set in an 8:2 ratio for network training and hyperparameter tuning, \added{while the remaining 721 traces were used as a test set, which was part of the overall dataset, to validate the denoising performance of the network.} The training data were split into 4181 slices of size 128$\times$128. To improve the network's training performance and prevent overfitting, data augmentation techniques, such as rotation and flipping, were applied to the dataset, and random noise of different frequency ranges and intensities was added to the training samples. This resulted in training samples as shown in Fig.~\ref{Fig. 5}. Unlike the high-frequency random noise commonly used in existing literature, the noise added to the seismic records in this study covers the effective frequency band of the seismic signal. This type of noise overlaps significantly with the effective wave energy in the frequency spectrum, making it difficult for traditional filtering methods to attenuate the noise while preserving the effective signal. Therefore, the noise construction method used in this study not only better reflects the noise characteristics in the actual observed data from complex working areas but also sets higher requirements for verifying the effectiveness of the denoising method.
+\begin{figure}[H]
+\centering
+\begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{Figure5a.pdf}
+    \caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{Figure5b.pdf}
+    \caption{}
+\end{subfigure}
+
+\vspace{0.1cm} % 两行之间的间距，可调
+\begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{Figure5c.pdf}
+    \caption{}
+\end{subfigure}
+\hfill
+\begin{subfigure}{0.45\textwidth}
+    \includegraphics[width=\linewidth]{Figure5d.pdf}
+    \caption{}
+\end{subfigure}
+
+\caption{Samples with different noise levels: (a) clean sample. (b) noise level 1. (c) noise level 2. (d) noise level 3.}
+\label{Fig. 5}
+\end{figure}
+
+
+The training samples are input into the U-Net3+ and U-Net networks in batches, with a batch size of 32 and a learning rate of \replaced{$1\times10^{-4}$}{$1$}. Both networks are trained for a total of 600 epochs. After each epoch, the denoising performance is evaluated using the validation set. Fig.~\ref{Fig. 6} illustrates the variation in training loss and validation SNR for both networks throughout the training process. As the number of epochs increases, the SNR of the denoised seismic data in the validation set gradually improves for both models. However, the U-Net3+ network exhibits faster convergence and achieves a higher SNR on the validation set compared with the U-Net network, indicating its superior generalization and denoising performance.
+\begin{figure}[h!] % 
+    \centering % 
+    \includegraphics[width=0.8\textwidth]{Figure6.pdf} % 
+    \caption{Evolution of training loss and validation SNR for the U-Net and U-Net3+.} % 
+    \label{Fig. 6} % 
+\end{figure}
+
+Random noise of different intensities was added to the test set data to conduct denoising experiments and evaluate the network model's adaptability to different noise intensities. The frequency range of the added random noise is 15--55 Hz, which overlaps with the main frequency band of the clean and effective signal. \replaced{This procedure is intended to evaluate}{This is done to test} the robustness of the proposed method against such random noise interference. Fig.~\ref{Fig. 7(a)} presents the clean test-set profile of the synthetic seismic record, starting from trace 2001. Random noise with level coefficients $k = 1, 2, \text{and } 3$ was added to produce the noisy profiles shown in Figs.~\ref{Fig. 7(b)},~\ref{Fig. 7(e)}, and~\ref{Fig. 7(h)}, respectively. As noise intensity increases, the effective signal becomes progressively \replaced{degraded}{more blurred}, and weaker events become \replaced{challenging to detect}{difficult to discern}. Figs.~\ref{Fig. 7(c)},~\ref{Fig. 7(f)}, and~\ref{Fig. 7(i)} show the denoised profiles produced by the U-Net3+ network when applied to the noisy data in Figs.~\ref{Fig. 7(b)},~\ref{Fig. 7(e)}, and~\ref{Fig. 7(h)}, respectively. For lower noise levels, the network nearly fully restores the effective signal. At higher noise levels, some weak signals (indicated by arrows) \replaced{may be attenuated or undetectable}{are lost}, but overall denoising performance remains robust. Figs.~\ref{Fig. 7(d)},~\ref{Fig. 7(g)}, and~\ref{Fig. 7(j)} illustrate the noise components removed from the noisy data shown in Figs.~\ref{Fig. 7(b)},~\ref{Fig. 7(e)}, and~\ref{Fig. 7(h)}, respectively. The absence or near absence of effective signals in these noise sections provides strong evidence of successful signal--noise separation.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7a.pdf}
+    \caption{}
+    \label{Fig. 7(a)}
+\end{subfigure}
+\hfill
+\begin{minipage}[b]{0.65\textwidth}
+\end{minipage}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7b.pdf}
+    \caption{}
+    \label{Fig. 7(b)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7c.pdf}
+    \caption{}
+    \label{Fig. 7(c)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7d.pdf}
+    \caption{}
+    \label{Fig. 7(d)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7e.pdf}
+    \caption{}
+    \label{Fig. 7(e)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7f.pdf}
+    \caption{}
+    \label{Fig. 7(f)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7g.pdf}
+    \caption{}
+    \label{Fig. 7(g)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7h.pdf}
+    \caption{}
+    \label{Fig. 7(h)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7i.pdf}
+    \caption{}
+    \label{Fig. 7(i)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure7j.pdf}
+    \caption{}
+    \label{Fig. 7(j)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{minipage}
+
+\caption{Denoising results of the U-Net3+ for synthetic seismic data with different noise levels. (a) clean data. (b),(e),(h) noisy data with noise levels 1,2,3. (c),(f),(i) corresponding denoised results. (d),(g),(j) removed noise components.}
+\label{Fig. 7}
+\end{figure}
+
+Table 1 reports the PSNR, SNR, and SSIM values for the denoising results of seismic data contaminated with different levels of random noise using the U-Net3+ network. \replaced{As the noise energy increases}{It can be observed that with increasing noise energy}, the PSNR, SNR, and SSIM of the denoised results decrease accordingly. Nevertheless, at a high noise level of $k = 3$, the denoised profile still achieves a PSNR of 38.99 dB, an SNR of 32.50 dB, and an SSIM of 0.970 to the clean data. These results demonstrate that the proposed method can effectively suppress random noise overlapping with the valid signal frequency band and remains robust across varying noise levels.
+
+\begin{table}[H]
+\centering
+\caption{Denoising results of U-Net3+ for seismic data at different noise levels (pre-denoising data in parentheses)}
+\begin{tabular}{cccc}
+\toprule
+Noise Level & PSNR(dB) & SNR(dB) & SSIM \\
+\midrule
+$k$=1 & 43.55 (28.27) & 37.06 (21.79) & 0.990 (0.710) \\
+$k$=2 & 41.55 (22.23) & 35.06 (15.74) & 0.984 (0.458) \\
+$k$=3 & 38.99 (18.71) & 32.50 (12.22) & 0.970 (0.326) \\
+\bottomrule
+\end{tabular}
+\label{Table 1}
+\end{table}
+
+\replaced{To rigorously assess the robustness and practical applicability of the proposed model, denoising experiments were conducted on seismic data contaminated with random noise at a high noise level ($k = 3$). Such high-noise conditions are deliberately designed to simulate the challenging environments frequently encountered in field seismic data acquisition, where noise often severely obscures useful reflections. Evaluating performance under these circumstances provides a more discriminative and meaningful assessment of model capability than low-noise settings, in which performance differences among methods tend to diminish}{To highlight the advantages of the proposed method, denoising experiments were conducted on seismic data contaminated with random noise at a noise level coefficient of $k = 3$}. Three methods were evaluated: the MSSA method, the conventional U-Net, and the proposed method. The denoised results are shown in Figs.~\ref{Fig. 8(c)},~\ref{Fig. 8(f)}, and~\ref{Fig. 8(i)}, corresponding to the MSSA method, conventional U-Net, and the proposed method, respectively. \replaced{As shown in Fig.~\ref{Fig. 8(c)},}{It can be observed that} the traditional low-rank denoising method, MSSA, exhibits limited capability in suppressing random noise. The denoised section still contains noticeable residual noise and discontinuities along the events, and many weak signals remain unrecovered. \replaced{In}{By} comparison, both the conventional U-Net and the proposed method are more effective at noise suppression and signal recovery, resulting in cleaner profiles with more continuous events. Comparing Figs.~\ref{Fig. 8(f)} and ~\ref{Fig. 8(i)} \replaced{demonstrates}{, it is evident} that the proposed method restores more structural details than the conventional U-Net, especially in the regions indicated by the black arrows. This demonstrates the superior ability of the U-Net3+ network in recovering weak seismic signals. Figs.~\ref{Fig. 8(d)},~\ref{Fig. 8(g)}, and~\ref{Fig. 8(j)} show the corresponding noise components removed by the three denoising methods, respectively. In Fig.~\ref{Fig. 8(d)}, valid signals are still visible at the location indicated by the black arrow, implying that the MSSA method has removed portions of useful signal during denoising. However, the noise components separated by both the conventional U-Net and the proposed method (Figs.~\ref{Fig. 8(g)} and ~\ref{Fig. 8(j)} do not reveal any valid signal. Figs.~\ref{Fig. 8(e)},~\ref{Fig. 8(h)}, and~\ref{Fig. 8(k)}  present the local similarity between the removed noise components and the clean data for the MSSA method, conventional U-Net, and proposed method, respectively. Generally, higher local similarity suggests that valid signal has leaked into the removed noise. As indicated by the arrow in Fig.~\ref{Fig. 8(e)}, the MSSA method exhibits greater signal leakage, while the conventional U-Net and the proposed method remove noise with minimal valid signal loss.
+\begin{figure}[H]
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8a.pdf}
+    \caption{}
+    \label{Fig. 8(a)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8b.pdf}
+    \caption{}
+    \label{Fig. 8(b)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{blank.pdf}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8c.pdf}
+    \caption{}
+    \label{Fig. 8(c)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8d.pdf}
+    \caption{}
+    \label{Fig. 8(d)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8e.pdf}
+    \caption{}
+    \label{Fig. 8(e)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8f.pdf}
+    \caption{}
+    \label{Fig. 8(f)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8g.pdf}
+    \caption{}
+    \label{Fig. 8(g)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8h.pdf}
+    \caption{}
+    \label{Fig. 8(h)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8i.pdf}
+    \caption{}
+    \label{Fig. 8(i)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8j.pdf}
+    \caption{}
+    \label{Fig. 8(j)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure8k.pdf}
+    \caption{}
+    \label{Fig. 8(k)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_SSIM.pdf}
+\end{subfigure}
+\vspace{0.1cm}
+
+\caption{Comparison of denoising performance: MSSA, U-Net, and U-Net3+. (a) clean data. (b) noisy data. (c), (f), (i) denoised results using MSSA, U-Net, and U-Net3+. (d), (g), (j) removed noise components. (e), (h), (k) local similarity maps between removed noise and clean data.}
+\end{figure}
+
+A quantitative analysis of the denoising results was performed using PSNR, SNR, and SSIM metrics, further demonstrating the advantages of the proposed method over the MSSA and conventional U-Net methods. Table 2 summarizes the PSNR, SNR, and SSIM values for the denoised results from the three methods. The noisy data with a noise level of $k = 3$ had a PSNR of 18.71 dB, which improved to 25.25 dB by the MSSA method, 38.12 dB by the conventional U-Net, and 38.99 dB by the proposed method. Similarly, the proposed method increased the SNR from 12.22 dB to 32.50 dB, an improvement of over 20 dB, outperforming both the MSSA and conventional U-Net methods. In terms of structural similarity with the clean data, the proposed method achieved an SSIM of 0.970, compared to 0.959 for the conventional U-Net and only 0.553 for the MSSA. These results demonstrate that the proposed method is both effective and robust in suppressing random noise and outperforms both the MSSA and conventional U-Net methods in denoising synthetic seismic data.
+
+\begin{table}[H]
+\centering
+\caption{Performance Comparison of Different Denoising Methods}
+\begin{tabular}{cccc}
+\toprule
+Method & PSNR/dB & SNR/dB & SSIM \\
+\midrule
+Noised Data & 18.71 & 12.22 & 0.326 \\
+U-Net3+ & 38.99 & 32.50 & 0.970 \\
+U-Net & 38.12 & 31.63 & 0.959 \\
+MSSA & 25.25 & 18.76 & 0.553 \\
+\bottomrule
+\end{tabular}
+\label{Table 2}
+\end{table}
+
+\subsection{Experiments on Field Seismic Data}
+The generalization and stability of the proposed model were \replaced{evaluated using}{verified through} a denoising test based on real post-stack 3D seismic data \deleted{acquired} from Blake Ridge, South Carolina. Blake Ridge is one of the largest passive continental margin gas hydrate accumulations in the world, characterized by a wide-spread but low-concentration methane hydrate reservoir. As shown in Fig.~\ref{Fig. 9}, the left portion of the seismic section represents a region of rapid erosion and sedimentation, while the right part is shaped by continuous flow erosion along the upper western boundary. Multiple buried sedimentary waves are observable across the profile. A prominent bottom simulating reflector \deleted{(BSR)}, which mimics the seafloor topography, appears throughout most of the section as a strong negative impedance contrast \citep{hornbach2008blakeridge}. Compared with synthetic seismic data, this real dataset exhibits a more complex geological structure. The original seismic volume has dimensions of $1300\times1306\times95$ with a sampling interval of 2 ms. A structurally complex portion of the volume was selected, contaminated with random noise, and then used to evaluate the denoising performance of the model.
+
+\begin{figure}[H] % 
+    \centering % 
+    \includegraphics[width=0.8\textwidth]{Figure9.pdf} % 
+    \caption{Field data from Black Bridge} % 
+    \label{Fig. 9} % 
+\end{figure}
+
+Fig.~\ref{Fig. 10(a)} shows a zoomed-in portion of the seismic section in Fig.~\ref{Fig. 9}. After adding random noise, the noisy data is shown in Fig.~\ref{Fig. 10(b)}, with an SNR of 21.23 dB. \deleted{It can be observed that} \replaced{The}{the} random noise severely contaminates the seismic section, blurring the original geological structures. For \replaced{example}{instance}, the sedimentary waves within the black box are obscured and become unidentifiable. Figs.~\ref{Fig. 10(c)},~\ref{Fig. 10(f)}, and~\ref{Fig. 10(i)} present the denoised results obtained using the MSSA method, the conventional U-Net, and the proposed U-Net3+, respectively. The comparison shows that the MSSA method performs the worst in denoising, failing to recover weak events. The U-Net3+ demonstrates superior performance compared to the conventional U-Net by recovering more valid signals, preserving finer structural details, and generating denoised results that more closely resemble the original clean seismic data. Figs.~\ref{Fig. 10(d)},~\ref{Fig. 10(g)}, and~\ref{Fig. 10(j)} show the corresponding removed noise. In Fig.~\ref{Fig. 10(d)}, the noise removed by the MSSA method reveals a visible valid signal at the arrow position, indicating signal leakage. However, the noise removed by U-Net and U-Net3+ does not exhibit any noticeable signal components. Figs.~\ref{Fig. 10(e)},~\ref{Fig. 10(h)}, and~\ref{Fig. 10(k)} display the local similarity between the denoised results and the clean data for MSSA, U-Net, and U-Net3+, respectively. The arrows in Figs.~\ref{Fig. 10(e)} and~\ref{Fig. 10(h)} indicate that MSSA and the conventional U-Net remove some valid signals. In contrast, the residual noise of U-Net3+ exhibits the lowest local similarity with the clean data, highlighting its superior signal preservation capability.
+
+\begin{figure}[H]
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10a.pdf}
+    \caption{}
+    \label{Fig. 10(a)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10b.pdf}
+    \caption{}
+    \label{Fig. 10(b)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{blank.pdf}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10c.pdf}
+    \caption{}
+    \label{Fig. 10(c)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10d.pdf}
+    \caption{}
+    \label{Fig. 10(d)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10e.pdf}
+    \caption{}
+    \label{Fig. 10(e)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10f.pdf}
+    \caption{}
+    \label{Fig. 10(f)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10g.pdf}
+    \caption{}
+    \label{Fig. 10(g)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10h.pdf}
+    \caption{}
+    \label{Fig. 10(h)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10i.pdf}
+    \caption{}
+    \label{Fig. 10(i)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10j.pdf}
+    \caption{}
+    \label{Fig. 10(j)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure10k.pdf}
+    \caption{}
+    \label{Fig. 10(k)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{subfigure}
+\hfill
+\begin{subfigure}[t]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_SSIM.pdf}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\caption{Comparison of denoising performance: MSSA, U-Net, and U-Net3+. (a) clean data. (b) noisy data. (c), (f), (i) denoised results using MSSA, U-Net, and U-Net3+. (d), (g), (j) removed noise components. (e), (h), (k) local similarity maps between removed noise and clean data.}
+\end{figure}
+
+Figs.~\ref{Fig. 11(a)} and~\ref{Fig. 11(b)} presents a zoomed-in view of the black-boxed regions in Figs.~\ref{Fig. 10(f)} and~\ref{Fig. 10(i)}. The arrow in the figure points to a sedimentary wave. \deleted{It is evident that} \replaced{The}{the} denoising result from the conventional U-Net fails to recover sufficient valid signals to make this sedimentary wave identifiable. In comparison, the denoised result from the proposed U-Net3+ successfully restores this sedimentary feature.
+
+\begin{figure}[H]
+    \centering                         
+    \begin{subfigure}[b]{0.45\textwidth} 
+        \centering
+        \includegraphics[width=\linewidth]{Figure11a.pdf} 
+        \caption{}
+        \label{Fig. 11(a)} 
+    \end{subfigure}
+    \hfill 
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure11b.pdf} 
+        \caption{} 
+        \label{Fig. 11(b)}
+    \end{subfigure}
+    \caption{Local denoising comparison between U-Net and U-Net3+. The arrow indicates the sedimentary feature that is successfully restored by U-Net3+.}
+\end{figure}
+
+Table 3 summarizes the PSNR, SNR, and SSIM metrics between the denoised results and the original clean data for the three methods. \deleted{From the quantitative analysis,} \replaced{The}{the} proposed U-Net3+ achieves the best denoising performance. The MSSA method improves the PSNR and SNR by only about 3 dB, whereas both the conventional U-Net and the proposed method improve the SNR by nearly 10 dB. The denoising result of the proposed method yields a PSNR of 36.64 dB and an SNR of 30.61 dB, which are higher than those of the other two methods. Moreover, the structural similarity of the U-Net3+ result with the clean data is also optimal among the three methods. The results demonstrate that the proposed method outperforms MSSA and the conventional U-Net in denoising seismic data with complex structures.
+
+\begin{table}[H]
+\centering
+\caption{Performance Comparison of Different Denoising Methods}
+\begin{tabular}{cccc}
+\toprule
+Method & PSNR(dB) & SNR(dB) & SSIM \\
+\midrule
+Noised Data & 27.27 & 21.23 & 0.490 \\
+U-Net3+ & 36.64 & 30.61 & 0.918 \\
+U-Net & 35.19 & 29.16 & 0.899 \\
+MSSA & 30.84 & 24.81 & 0.632 \\
+\bottomrule
+\end{tabular}
+\label{Table 3}
+\end{table}
+
+
+\subsection{Transfer Learning}
+In practical seismic data processing, the limited availability of large-scale clean seismic datasets for supervised label generation significantly restricts the effectiveness of supervised denoising approaches. Transfer learning offers a promising solution to this challenge. To evaluate the real-world applicability of the proposed denoising method, a transfer learning strategy is employed to denoise field seismic data without the need for clean labels. The dataset utilized in this study is an open-source land 3D seismic dataset acquired in South Texas, USA. Fig.~\ref{Fig. 12} presents one of the representative seismic sections. As shown in Fig.~\ref{Fig. 12}, strong noise interference \replaced{exists}{is observed} below 2000 ms in the deeper part of the section, necessitating denoising.The transfer learning strategy is \deleted{implemented} as follows:
+
+1)Relatively clean portions of the seismic data are selected, and synthetic random noise with varying intensities and frequency bands is added to generate pseudo-label pairs.
+
+2)These pseudo-label pairs are then used to fine-tune a pre-trained model that was originally trained on synthetic Marmousi data.
+
+The fine-tuned model is subsequently applied to denoise the noisy sections of the real seismic data.
+
+
+\begin{figure}[H] % 
+    \centering % 
+    \includegraphics[width=0.8\textwidth]{Figure12.pdf} % 
+    \caption{Field data from Black Bridge} % 
+    \label{Fig. 12} % 
+\end{figure}
+
+
+To more clearly demonstrate the denoising performance, a low-SNR portion of the entire profile was extracted for analysis. Fig.~\ref{Fig. 13(a)} shows the noisy data below 2000ms from Fig.~\ref{Fig. 12}. Figs.~\ref{Fig. 13(b)},~\ref{Fig. 13(e)}, and~\ref{Fig. 13(h)} present the denoising results using the MSSA method, the conventional U-Net, and the proposed method, respectively. \deleted{It can be observed that} \replaced{The}{the} MSSA-denoised section contains noticeable residual noise. \replaced{In contrast,}{While} the conventional U-Net and proposed \added{U-Net3+} methods achieve better noise suppression. A comparison between Figs.~\ref{Fig. 13(e)} and~\ref{Fig. 13(h)} reveals that the conventional U-Net fails to fully restore weak events, resulting in lower continuity and weaker energy, while the proposed U-Net3+ method recovers more coherent reflectors and yields a cleaner denoised section. Figs.~\ref{Fig. 13(c)},~\ref{Fig. 13(f)}, and~\ref{Fig. 13(i)} show the corresponding noise sections removed for each method. At the locations indicated by black arrows, significant signal leakage can be seen in the noise sections produced by MSSA and U-Net, indicating that parts of the useful signal were mistakenly removed. In contrast, the noise section of the proposed method shows little to no visible signal, demonstrating better preservation of valid seismic reflections. Since no clean ground truth is available for this real-data test, direct local similarity between the removed noise and clean data cannot be computed. As an alternative, Figs.~\ref{Fig. 13(d)},~\ref{Fig. 13(g)}, and~\ref{Fig. 13(j)} display the local similarity between the removed noise and the corresponding denoised \replaced{results}{result}. The proposed method yields the lowest similarity, indicating minimal leakage of useful signals and better signal preservation.
+
+\begin{figure}[H]
+\centering
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13a.pdf}
+    \caption{}
+    \label{Fig. 13(a)}
+\end{subfigure}
+\hfill
+\begin{minipage}[b]{0.65\textwidth}
+\end{minipage}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13b.pdf}
+    \caption{}
+    \label{Fig. 13(b)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13c.pdf}
+    \caption{}
+    \label{Fig. 13(c)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13d.pdf}
+    \caption{}
+    \label{Fig. 13(d)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13e.pdf}
+    \caption{}
+    \label{Fig. 13(e)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13f.pdf}
+    \caption{}
+    \label{Fig. 13(f)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13g.pdf}
+    \caption{}
+    \label{Fig. 13(g)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13h.pdf}
+    \caption{}
+    \label{Fig. 13(h)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13i.pdf}
+    \caption{}
+    \label{Fig. 13(i)}
+\end{subfigure}
+\hfill
+\begin{subfigure}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{Figure13j.pdf}
+    \caption{}
+    \label{Fig. 13(j)}
+\end{subfigure}
+
+\vspace{0.1cm}
+
+\begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_seismic(-1-1).pdf}
+\end{minipage}
+\hfill
+\begin{minipage}[b]{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.9\linewidth]{colorbar_SSIM.pdf}
+\end{minipage}
+
+\caption{Comparison of denoising performance: MSSA, U-Net, and U-Net3+. (a) clean data. (b), (e), (h) denoised results using MSSA, U-Net, and U-Net3+. (c), (f), (i) removed noise components. (d), (g), (j) local similarity maps between removed noise and denoised result.}
+\end{figure}
+
+To further compare the denoising performance of the three methods, \replaced{we analyzed the frequency-wavenumber (F-K) domain}{analysis in the frequency-wavenumber (F-K) domain was conducted}. In general, effective seismic signals exhibit stable propagation directions and well-defined velocity characteristics, resulting in energy that is concentrated in the low-wavenumber and relatively narrow-frequency regions of the F-K spectrum---typically aligned along the main axis or specific directions. Conversely, random noise often exhibits more complex propagation behavior and broader velocity bands, leading to dispersed energy distributed across high wavenumbers and a wide frequency range. Fig.~\ref{Fig. 14(a)} shows the F-K spectrum of the noisy input, where the energy of the effective signal is primarily concentrated in the low-frequency (below 50Hz) and low-wavenumber region, while noise energy is diffusely distributed throughout the spectrum, with substantial overlap with the effective signal. Figs.~\ref{Fig. 14(b)},~\ref{Fig. 14(c)}, and~\ref{Fig. 14(d)} present the F-K spectra of the denoised results using the MSSA method, the conventional U-Net, and the proposed method, respectively. The MSSA result exhibits significant energy dispersion, indicating the loss of some low-frequency, low-wavenumber signal components, as well as the presence of residual high-frequency, high-wavenumber noise.In comparison, the U-Net and proposed U-Net3+ methods preserve more of the low-frequency, low-wavenumber effective signal. Moreover, the F-K spectrum of the proposed method shows more concentrated energy and less high-frequency, high-wavenumber noise than that of the conventional U-Net, indicating more effective noise suppression.These results demonstrate that the proposed method outperforms both MSSA and the conventional U-Net in real seismic data denoising tasks achieving more thorough noise removal while better preserving the \replaced{effective}{useful} signal.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure14a.pdf} 
+        \caption{}
+        \label{Fig. 14(a)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure14b.pdf} 
+        \caption{}
+        \label{Fig. 14(b)}
+    \end{subfigure}
+    
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure14c.pdf} 
+        \caption{}
+        \label{Fig. 14(c)}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figure14d.pdf} 
+        \caption{}
+        \label{Fig. 14(d)}
+    \end{subfigure}
+    
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=0.8\textwidth]{colorbar_FK.pdf} 
+    \end{subfigure}
+    \caption{Comparison of the F-K spectrum of denoising results. (a) original noisy data. (b) MSSA denoised result. (c) U-Net denoised result. (d) U-Net3+ denoised result.}
+\end{figure}
+
+\section{Conclusion}
+\label{}
+We propose a seismic random noise suppression method based on the U-Net3+ network, incorporating full-scale feature fusion and deep supervision. Contrary to conventional U-Net, U-Net3+ introduces a full-scale fusion module that aggregates features from all encoder layers, effectively capturing contextual information across multiple resolutions. This enhancement improves the network's ability to identify spatial noise patterns, strengthening its robustness in denoising tasks. Additionally, the deep supervision mechanism, applied to outputs across different scales, augments the network's ability to recover weak signals in low-SNR conditions. Denoising experiments conducted on both synthetic and real noisy seismic data demonstrate the effectiveness of the proposed method in suppressing random noise of varying intensities, particularly noise overlapping with the frequency band of valid seismic signals. Compared with the MSSA method and conventional U-Net, the proposed method realizes effective noise suppression while preserving weak reflections, with signal fidelity well maintained. \replaced{Furthermore, the successful transfer of the model trained on synthetic data to real field data through transfer learning verifies its transferability and generalization capability across different geological settings, confirming the practical applicability of the proposed approach}{Furthermore, when applied to denoising real seismic data without clean labels, the method also demonstrates outstanding performance, confirming its practical applicability}.
+
+
+\bibliographystyle{elsarticle-harv} 
+\bibliography{ref} 
+\end{document}
+\endinput
+%%
+

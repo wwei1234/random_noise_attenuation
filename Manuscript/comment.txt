@@ -1,0 +1,32 @@
+Reviewer #1: The manuscript apply U-Net3+ to random noise suppression. Here are some suggestions.
+1．Some written mistakes should be avoided. For example, the citation style is not correct. In Introduction part, capitalized words are abused. Authors should check such problems carefully.
+2．The authors apply U-net3+ to seismic noise suppression. The methodological depth and innovation is not sufficient. I suggest authors consider incorporating geophysical or physical priors.
+3．Please use the same colormap in a figure. For example, in Figure 8, (a),(c),(f),and (i) use the same colormap, while (b), (d), (g) and (j) use another colormap. The data type of these 8 figures is the same. The colormap and data range should also be the same for comparison purpose.
+4．Authors apply the network to post-stack profile. How about shot gathers?
+5．Expand experimental design. The current experiments only include Marmousi II model and field dataset. Different noise levels are shown for the U-Net3+ in synthetic model without other methods comparison. The comparison with other methods is insufficient.
+
+
+
+Reviewer #2:
+This manuscript proposed to use U-Net3+ for noise remove. which incorporates full-scale feature fusion and deep supervision, improving the network's ability to understand multi scale features and detect spatial noise patterns. Both synthetic and field seismic datasets validate the model, demonstrating superior denoising performance compared to multichannel singular spectrum analysis (MSSA) and conventional U-Net.
+However, the following problems should be solved at first.
+
+1. The authors are encouraged to further improve their English writing proficiency, as the manuscript contains numerous colloquial expressions. More formal and academically appropriate language is recommended.
+
+2. Please revise the in-text citations and reference list according to the formatting guidelines of the target journal. All references should include DOIs. For Chinese authors, only the surname in pinyin should be used in citations (e.g., Zhang et al.).
+
+3. Punctuation in mathematical expressions should be used consistently with standard academic conventions. For instance, a comma—not a period—should follow Equation (1). Additionally, variables in displayed equations should be typeset in italics (or in the math font required by the journal), and the same typographic style should be maintained for corresponding variables in the main text.
+
+4. The literature review on low-rank methods in the first paragraph of the Introduction is insufficient. The authors are advised to incorporate recent representative works to provide a more comprehensive background and better motivate the study.
+
+5. In Equation (1), the symbol "n" should be corrected to "s." Furthermore, the symbol "H" used in Equations (9) and (10) is recommended to be replaced with a different letter to avoid ambiguity. Similarly, the symbol "M" in Equation (10) should also be substituted with a more distinctive variable.
+
+6. The "Method" section should directly present the network architecture. The content currently located on page 4, lines 40-55, would be better placed starting from line 35 on page 7 to enhance logical flow and structural clarity.
+
+7. It is recommended to integrate the noise-adding strategy currently shown in Figure 7 into Figure 5, as this would provide a clearer illustration of the dataset construction process. Accordingly, the results in Table 1 should be described in reference to the revised Figure 5. Note that the test set is part of the overall dataset and should be explicitly acknowledged as such in the data description.
+
+8. The statement "The training samples are fed into the U-Net3+ network in batches with a batch size of 32 and a learning rate of 1" raises concerns regarding the learning rate setting. A learning rate of 1 is unusually high for deep learning models, which typically use values such as 1e−3 or 1e−4. The authors should justify this choice or validate its appropriateness through ablation studies.
+
+9. Figure 6 should be replaced with training and validation loss curves. The experiments should include comparative loss curves for both U-Net and U-Net3+ under identical settings, as loss trajectories are essential for an initial assessment of model convergence and generalization behavior.
+
+10. It is recommended to directly apply transfer learning using the model trained in the first experiment and compare its performance on the second dataset against a model trained from scratch. This comparison would provide stronger evidence regarding the model's transferability and generalization capability.

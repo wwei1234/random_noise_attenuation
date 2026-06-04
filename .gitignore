@@ -1,0 +1,60 @@
+# Python caches and local environments
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# Build and packaged application outputs
+build/
+dist/
+*.spec
+
+# Large datasets, trained models, and generated arrays
+*.npy
+*.npz
+*.sgy
+*.segy
+*.dat
+*.mat
+*.pth
+*.pt
+*.ckpt
+*.h5
+
+# Archives and binary release bundles
+*.rar
+*.zip
+*.7z
+*.tar
+*.gz
+
+# Generated figures and documents
+*.png
+*.jpg
+*.jpeg
+*.eps
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+
+# Radar/data acquisition files
+*.DT1
+*.dt1
+*.HD
+*.hd
+
+# LaTeX generated output folders
+out/
+
+# Runtime logs and temporary files
+*.log
+*.tmp
+*.bak
+Thumbs.db
+.DS_Store

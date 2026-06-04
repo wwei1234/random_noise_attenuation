@@ -1,0 +1,64 @@
+\documentclass[preprint,12pt]{elsarticle}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}    
+\usepackage{caption}  
+\journal{Journal of Applied Geophysics}
+\begin{document}
+\begin{frontmatter}
+
+\title{U-Net3+ With Full-Scale Fusion and Deep Supervision for Seismic Noise Suppression}
+
+\author[label1]{Wei Wang} %% Author name
+\author[label2]{Zhiyuan Gu} %% Author name
+\author[label3]{Qianggong Song} %% Author name
+\author[label1]{Hanming Gu\corref{cor1}} %% Author name
+
+%% Author affiliation
+\affiliation[label1]{organization={the College for Elite Engineers, China University of Geosciences, Wuhan},%Department and Organization
+            addressline={No. 388, Lumo Road, Hongshan District}, 
+            city={Wuhan},
+            postcode={430074}, 
+            state={Hubei},
+            country={China}}
+            
+\affiliation[label2]{organization={Changjiang Geophysical Exploration and Testing Company Ltd.},%Department and Organization
+            addressline={No. 1863, Jiefang Avenue, 24-1 Building, Jiang'an District}, 
+            city={Wuhan},
+            postcode={430010}, 
+            state={Hubei},
+            country={China}}
+
+\affiliation[label3]{organization={National Engineering Research Center of Oil and Gas Exploration Computer Software, BGP Inc., CNPC},%Department and Organization
+            addressline={No. 189, Fanyang West Road}, 
+            city={Zhuozhou},
+            postcode={072751}, 
+            state={Hebei},
+            country={China}}
+\cortext[cor1]{Corresponding author.}     
+%%Research highlights
+\begin{highlights}
+    \item A full-scale feature fusion module is employed to comprehensively integrate multi-scale feature information, which enhances the network's ability to recognize the spatial distribution patterns of random noise, thereby achieving stronger robustness during the noise suppression process.
+    \item Deep supervision is utilized by introducing auxiliary loss functions at the output of each scale in the decoder, effectively improving the network's learning efficiency and its capability to preserve weak signals in low signal-to-noise ratio environments.
+    \item Unlike the high-frequency random noise commonly used in existing literature, the noise added to the seismic records in this study covers the effective frequency band of the seismic signal. This noise construction method not only more closely approximates the noise characteristics found in actual observation data from complex work areas but also poses higher requirements for validating the effectiveness of the denoising method.
+\end{highlights}
+
+\begin{abstract}
+%% Text of abstract
+Field-acquired seismic data contain inherent random noise, which challenges subsequent data processing and interpretation. This noise is non-stationary, broadband, and time-varying. Conventional denoising methods often rely on manually defined thresholds and exhibit limited efficacy in suppressing noise overlapping with the signal bandwidth. In contrast, deep learning-based methods are data-driven and learn the spatial, temporal, and frequency characteristics of seismic data. These methods map noise and useful signals into distinct high-dimensional spaces, overcoming the limitations of traditional approaches, especially in handling overlapping frequencies and non-stationary noise, thus improving the signal-to-noise ratio (SNR) and resolution. U-Net-based networks have shown promising results in seismic denoising tasks. However, conventional U-Net architectures limit the fusion of multi-scale features and adaptation to complex geological structures or low-SNR data. To address these, this paper proposes a seismic noise suppression method using U-Net3+, which incorporates full-scale feature fusion and deep supervision, improving the network's ability to understand multi-scale features and detect spatial noise patterns. Both synthetic and field seismic datasets validate the model, demonstrating superior denoising performance compared to multichannel singular spectrum analysis (MSSA) and conventional U-Net.
+\end{abstract}
+
+\begin{keyword}
+Seismic Denoising, Deep Learning, U-Net Network, Random Noise
+\end{keyword}
+
+\end{frontmatter}
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.

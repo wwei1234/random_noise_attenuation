@@ -1,0 +1,157 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{times}
+\setstretch{1.25}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Large Response to Reviewers} \\[1em]
+    \textbf{Manuscript ID: APPGEO-D-25-00931} \\
+    \textbf{Title: U-Net3+ With Full-Scale Fusion and Deep Supervision for Seismic Noise Suppression} \\[1em]
+\end{center}
+
+We sincerely thank the editor and reviewers for their careful reading of our manuscript and for providing insightful and constructive comments. 
+All suggestions have been carefully considered and addressed in the revised version. 
+Below we provide a detailed, point-by-point response to each comment. 
+All modifications in the revised manuscript are highlighted accordingly, which has greatly contributed to improving the overall quality and clarity of our work.
+
+---
+
+\textbf{Response to Reviewer \#1}
+
+\textbf{Comment 1:}  
+Some written mistakes should be avoided. For example, the citation style is not correct. In Introduction part, capitalized words are abused. Authors should check such problems carefully.
+
+\textcolor{blue}{\textbf{Response:}}  
+We sincerely thank the reviewer for the careful checking. We have carefully reviewed the entire manuscript, corrected the citation format according to the journal’s requirements, and removed unnecessary capitalized words. The corresponding changes have been highlighted in the revised manuscript.
+
+---
+
+\textbf{Comment 2:}  
+The authors apply U-Net3+ to seismic noise suppression. The methodological depth and innovation is not sufficient. I suggest authors consider incorporating geophysical or physical priors.
+
+\textcolor{blue}{\textbf{Response:}}  
+We thank the reviewer for this valuable suggestion. We agree that incorporating physical priors is important for improving the physical interpretability of deep-learning-based denoising methods.We have indeed incorporated domain-specific geophysical priors into our methodology, particularly in the training sample construction strategy. Unlike conventional approaches that simply add high-frequency random noise, we deliberately design the synthetic noise to overlap with the effective signal in the frequency domain. This design is based on the critical geophysical understanding that noise in real seismic data often overlaps with effective signals in the frequency domain, making it particularly challenging to separate using traditional frequency-based filtering methods. By training the network with frequency-overlapping noise, we enhance its ability to distinguish between signal and noise based on spatial coherence patterns and structural features rather than solely relying on frequency characteristics. This physics-informed data augmentation strategy is essential for the network to learn geophysically meaningful representations and achieve robust performance on real field data where signal-noise frequency overlap is common. The corresponding description has been added to the Introduction section and highlighted in the revised manuscript.
+
+We acknowledge that further integration of additional geophysical constraints into the network architecture represents a valuable direction for future research. Such extensions could potentially enhance the interpretability and physical consistency of the model.In future work, we will explore integrating more explicit geophysical priors with deep learning frameworks to further enhance model generalization and interpretability.
+
+---
+
+\textbf{Comment 3:}  
+Please use the same colormap in a figure. For example, in Figure 8, (a),(c),(f),and (i) use the same colormap, while (b), (d), (g) and (j) use another colormap. The data type of these 8 figures is the same. The colormap and data range should also be the same for comparison purpose.
+
+\textcolor{blue}{\textbf{Response:}}  
+We appreciate the reviewer’s careful observation. Following the suggestion, we have unified the colormaps for all figures representing data of the same type. Originally, the colormap differences were due to the normalization of noisy data to the range (0, 1) before input to the network, whereas the predicted noise includes negative values. If the noisy data were rescaled to the range (-1, 1) and plotted using the same colorbar, the visual representation would remain unchanged, with only the numerical range being shifted. To ensure rigor, we have normalized both the noisy and clean data to the range (-1, 1) and unified the colormaps for consistent visual representation.
+
+---
+
+\textbf{Comment 4:}  
+Authors apply the network to post-stack profile. How about shot gathers?
+
+\textcolor{blue}{\textbf{Response:}}  
+We sincerely thank the reviewer for this professional suggestion. The present study focuses on post-stack seismic profiles, which differ markedly from shot gathers in terms of data characteristics and statistical properties. Extending the proposed method to shot gathers would require establishing a new forward modeling framework and adopting different preprocessing strategies, which are beyond the scope of this work. 
+
+We fully agree that extending this framework to shot-gather data is meaningful and plan to investigate this direction in future work by integrating physical priors and targeted preprocessing strategies.
+
+---
+
+\textbf{Comment 5:}  
+Expand experimental design. The current experiments only include Marmousi II model and field dataset. Different noise levels are shown for the U-Net3+ in synthetic model without other methods comparison. The comparison with other methods is insufficient.
+
+\textcolor{blue}{\textbf{Response:}}  
+We thank the reviewer for this valuable suggestion. Regarding the experimental design, we would like to clarify the following points:
+First, our focus on high-noise scenarios is driven by practical application requirements. High-noise conditions are commonly encountered in seismic data acquisition in complex geological environments and provide more effective discrimination among different methods. Under high-noise settings, we have conducted detailed comparisons of U-Net3+ with MSSA and conventional U-Net, which sufficiently demonstrate the superior performance of the proposed method.
+Second, while the synthetic experiments use the Marmousi II model, we further validated the method's generalization capability on two field datasets from different geological settings. These real-world data experiments provide strong evidence of the method's practical applicability.
+We have added a corresponding explanation to the first experimental section in the revised manuscript (highlighted for reference) to better clarify our experimental rationale. We appreciate the reviewer's suggestion, which has helped us improve the presentation of our experimental design.
+
+---
+
+\bigskip
+\textbf{Response to Reviewer \#2}
+
+\textbf{Comment 1:}  
+The authors are encouraged to further improve their English writing proficiency, as the manuscript contains numerous colloquial expressions. More formal and academically appropriate language is recommended.
+
+\textcolor{blue}{\textbf{Response:}} 
+We appreciate the reviewer’s valuable suggestion. We have carefully reviewed the entire manuscript and identified colloquial or informal expressions, which have now been revised. These expressions have been replaced with more formal and academically appropriate language, enhancing the overall professionalism, clarity, and readability of the manuscript. Additionally, we paid particular attention to sentence structure and logical coherence during the revision process, ensuring that the content is both accurate and consistent with academic writing standards. For the reviewer’s convenience, all modifications have been clearly marked in the revised manuscript for easy reference.
+
+---
+
+\textbf{Comment 2:}  
+Please revise the in-text citations and reference list according to the formatting guidelines of the target journal. All references should include DOIs. For Chinese authors, only the surname in pinyin should be used in citations (e.g., Zhang et al.).
+
+\textcolor{blue}{\textbf{Response:}} 
+We sincerely thank the reviewer for this constructive suggestion. The in-text citations and reference list have been thoroughly revised to comply with the formatting guidelines of the target journal. DOIs have been added for all references, and citations of Chinese authors have been corrected to include only the surname in pinyin, in accordance with the reviewer’s recommendation. These revisions ensure full compliance with the journal’s reference style and improve the manuscript’s overall scholarly rigor.
+
+---
+
+\textbf{Comment 3:}  
+Punctuation in mathematical expressions should be used consistently with standard academic conventions. For instance, a comma—not a period—should follow Equation (1). Additionally, variables in displayed equations should be typeset in italics (or in the math font required by the journal), and the same typographic style should be maintained for corresponding variables in the main text.
+
+\textcolor{blue}{\textbf{Response:}} 
+We thank the reviewer for this valuable comment. We have carefully checked and revised the punctuation in all mathematical expressions, and all variables in the manuscript have been consistently typeset in italics to comply with the journal’s formatting requirements. These adjustments ensure consistency and adherence to standard academic conventions throughout the manuscript.
+
+---
+
+\textbf{Comment 4:}  
+The literature review on low-rank methods in the first paragraph of the Introduction is insufficient. The authors are advised to incorporate recent representative works to provide a more comprehensive background and better motivate the study.
+
+\textcolor{blue}{\textbf{Response:}} 
+We appreciate the reviewer’s constructive comment and acknowledge the insufficiency in the original manuscript. In response, we have expanded the Introduction to include a more comprehensive review of low-rank denoising methods and have cited several recent representative studies. These additions provide a stronger background and better motivation for the present study
+
+---
+
+\textbf{Comment 5:}  
+In Equation (1), the symbol "$n$" should be corrected to "$s$". Furthermore, the symbol "$H$" used in Equations (9) and (10) is recommended to be replaced with a different letter to avoid ambiguity. Similarly, the symbol "$M$" in Equation (10) should also be substituted with a more distinctive variable.
+
+\textcolor{blue}{\textbf{Response:}} 
+We sincerely thank the reviewer for pointing out these issues and apologize for the typographical errors. In Equation (1), the symbol “$n$” has been corrected to “$s$” as suggested. Regarding Equations (9) and (10), the symbol “$H$” originally represents the output of the network model, which is why the same notation was used. To avoid potential confusion, we have replaced the symbol “$H$” in Equation 2 of the original manuscript with “$h$”. Additionally, the symbol “$M$” in Equation (10) has been replaced with a more distinctive variable, “$N_s$.” These changes clarify the notation and eliminate ambiguity.
+
+---
+
+\textbf{Comment 6:}  
+The "Method" section should directly present the network architecture. The content currently located on page 4, lines 40-55, would be better placed starting from line 35 on page 7 to enhance logical flow and structural clarity.
+
+\textcolor{blue}{\textbf{Response:}} 
+We sincerely thank the reviewer for this insightful suggestion. In response, we have reorganized the manuscript by relocating the content from page 4, lines 40–55, to start from line 35 on page 7, as recommended. This revision improves the logical flow of the “Method” section and enhances the overall readability and structural clarity of the manuscript.
+
+---
+
+\textbf{Comment 7:}  
+It is recommended to integrate the noise-adding strategy currently shown in Figure 7 into Figure 5, as this would provide a clearer illustration of the dataset construction process. Accordingly, the results in Table 1 should be described in reference to the revised Figure 5. Note that the test set is part of the overall dataset and should be explicitly acknowledged as such in the data description.
+
+\textcolor{blue}{\textbf{Response:}} 
+We thank the reviewer for this constructive and insightful suggestion. Following the recommendation, we have updated Figure 5 to display training samples with varying noise levels, replacing the previous illustration. We apologize for any lack of clarity in the original manuscript; the test set was indeed already part of the overall dataset, and in the revised manuscript, we have explicitly emphasized this point. All modifications have been clearly marked for easy reference.
+
+---
+
+\textbf{Comment 8:}  
+The statement "The training samples are fed into the U-Net3+ network in batches with a batch size of 32 and a learning rate of 1" raises concerns regarding the learning rate setting. A learning rate of 1 is unusually high for deep learning models, which typically use values such as $1\times10^{-3}$ or $1\times10^{-4}$. The authors should justify this choice or validate its appropriateness through ablation studies.
+
+\textcolor{blue}{\textbf{Response:}} 
+We thank the reviewer for pointing out this issue. We apologize for the typographical error in the original manuscript. The correct learning rate used in our experiments is $1\times10^{-4}$, not 1 as previously stated. This has been corrected and clearly highlighted in the revised manuscript.
+
+---
+
+\textbf{Comment 9:}  
+Figure 6 should be replaced with training and validation loss curves. The experiments should include comparative loss curves for both U-Net and U-Net3+ under identical settings, as loss trajectories are essential for an initial assessment of model convergence and generalization behavior.
+
+\textcolor{blue}{\textbf{Response:}} 
+We thank the reviewer for this valuable suggestion. Following the recommendation, we have updated Figure 6 to include the training loss curves for both U-Net3+ and U-Net under identical experimental settings. To facilitate clear comparison without overlapping curves, we present the validation performance using signal-to-noise ratio (SNR) instead of validation loss, which serves an equivalent purpose for assessing convergence and generalization. In the manuscript, we analyze and discuss the comparative performance and generalization capabilities of the two networks based on these curves.
+
+---
+
+\textbf{Comment 10:}  
+It is recommended to directly apply transfer learning using the model trained in the first experiment and compare its performance on the second dataset against a model trained from scratch. This comparison would provide stronger evidence regarding the model's transferability and generalization capability.
+
+\textcolor{blue}{\textbf{Response:}} 
+We sincerely appreciate the reviewer's professional and forward-looking suggestion regarding transfer learning validation. We would like to clarify our experimental design and the rationale behind our approach.
+
+Transfer learning is typically employed when labeled samples in the target domain are scarce. However, in our second experiment (the field dataset), we have sufficient labeled samples to train the model from scratch, which has demonstrated excellent denoising performance. Therefore, direct training is more appropriate and effective for this case.
+More importantly, we have systematically validated the model's transfer learning capability in the third real-world field data experiment. Specifically, we employed a complete transfer learning pipeline: "pre-training on synthetic data $\rightarrow$ pseudo-label generation $\rightarrow$ model fine-tuning $\rightarrow$ practical application," and achieved excellent denoising results on field data lacking ground truth labels. This experiment provides strong evidence of the model's generalization capability and transferability in practical application scenarios.
+Nevertheless, we acknowledge that a systematic comparison of transfer learning strategies under various data availability conditions would be a valuable direction for future research, which could further enhance our understanding of optimal training protocols for different seismic data scenarios.
+
+\end{document}

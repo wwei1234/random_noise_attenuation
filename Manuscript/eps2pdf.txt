@@ -1,0 +1,16 @@
+@echo off
+chcp 65001 >nul
+echo ========================================
+echo   EPS → PDF 批量转换工具  (by ChatGPT)
+echo ========================================
+echo.
+
+cd /d "D:\桌面\新建文件夹"
+
+for %%f in (*.eps) do (
+    echo 正在转换：%%f ...
+    epstopdf --gsopt=-dPDFSETTINGS=/printer "%%f"
+)
+echo.
+echo ✅ 全部转换完成！
+pause

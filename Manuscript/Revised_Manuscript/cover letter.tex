@@ -1,0 +1,92 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{parskip} 
+\usepackage{CJKutf8} 
+\begin{document}
+\begin{CJK}{UTF8}{gbsn}
+
+\begin{center}
+{\LARGE \textbf{Cover Letter}}
+\end{center}
+
+\vspace{6pt}
+
+\noindent
+Date: \today
+
+\vspace{6pt}
+
+\noindent
+Editor-in-Chief\\
+\textbf{Journal of Applied Geophysics}
+
+\vspace{12pt}
+
+\noindent
+Re: Manuscript ID: \textbf{APPGEO-D-25-00931} \\
+Title: \textbf{U-Net3+ With Full-Scale Fusion and Deep Supervision for Seismic Noise Suppression}
+
+\vspace{8pt}
+
+\noindent
+Dear Professor Xu,
+
+\vspace{6pt}
+
+\noindent
+We sincerely thank you and the reviewers for the careful evaluation and valuable feedback on our manuscript. 
+We have thoroughly revised the manuscript in response to all comments and suggestions. 
+A detailed, point-by-point response is provided in the accompanying “Response to Reviewers” document. 
+The major revisions and improvements are summarized as follows:
+
+\vspace{6pt}
+\begin{itemize}
+  \setlength\itemsep{2pt}
+  \item \textbf{Language and formatting:} 
+  The entire manuscript has been carefully polished to improve academic writing quality. 
+  Citation and reference formatting have been corrected to fully comply with the journal’s requirements, including DOI completion and consistent use of surnames in pinyin for Chinese authors.
+  
+  \item \textbf{Methodological refinement:} 
+  Expanded the Method section to clarify the incorporation of geophysical priors into the network design—particularly through a physics-informed data construction strategy where synthetic noise is designed to overlap with signal spectra, reflecting realistic field conditions. 
+  All mathematical symbols and notations have been standardized for clarity and consistency.
+  
+  \item \textbf{Experimental clarification and enhancement:} 
+  Corrected the learning rate typographical error (to $1\times10^{-4}$), unified colormaps for comparable figures, and replaced Fig.~6 with comprehensive training loss and validation SNR curves for both U-Net and U-Net3+ to illustrate convergence and generalization behavior. 
+  Additional explanation has been added to justify the focus on high-noise scenarios as a realistic and challenging benchmark.
+  
+  \item \textbf{Transfer learning validation:} 
+  Detailed the transfer-learning experiment using the model pre-trained on synthetic data and fine-tuned with pseudo-labeled field samples. 
+  The successful application of this adapted model to real field data demonstrates its transferability, generalization capability, and practical value across different geological settings.
+  
+  \item \textbf{Figures and structural reorganization:} 
+  Revised figure arrangements and captions to enhance logical clarity—specifically, integrated the noise-adding schematic into the dataset illustration (Figure 5), reorganized sections as suggested to improve readability, and corrected all equation symbols for accuracy.
+\end{itemize}
+
+\vspace{6pt}
+\noindent
+Files included in this resubmission:
+\begin{enumerate}
+  \item Clean revised manuscript 
+  \item Revised manuscript with tracked changes 
+  \item Response to Reviewers (point-by-point replies)
+  \item Figures 
+\end{enumerate}
+
+\vspace{6pt}
+\noindent
+We believe these revisions have substantially strengthened the manuscript by improving clarity, methodological rigor, and experimental completeness. 
+We are grateful for the opportunity to revise our work and sincerely hope that the revised version will now meet the journal’s publication standards and contribute to the advancement of seismic data processing research.
+
+\vspace{12pt}
+
+\noindent
+Sincerely,\\
+Hanming Gu \\
+College for Elite Engineers, China University of Geosciences (Wuhan) \\
+No. 388, Lumo Road, Hongshan District, Wuhan 430074, Hubei, China \\
+hmgu@cug.edu.cn
+
+\end{CJK}
+\end{document}

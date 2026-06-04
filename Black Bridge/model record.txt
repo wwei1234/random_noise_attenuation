@@ -1,0 +1,11 @@
+initial snr : 17.72dB
+
+model_6_2：	100 percent	epoch: 800	dropout: 0.3	result：27.60 dB(800)
+model_6_9:	100 percent	epoch: 200	dropout: 0	result：28.98 dB(196)
+
+model_U_Net:	80percent	epoch: 200	dropout: 0	result：27.46dB(27)
+
+mssa : 22.90dB
+
+
+

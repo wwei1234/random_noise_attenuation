@@ -1,0 +1,271 @@
+[1]@article{doi:10.1190/1.1441442,
+author = {J. Bee Bednar},
+title = {Applications of median filtering to deconvolution, pulse estimation, and statistical editing of seismic data},
+journal = {GEOPHYSICS},
+volume = {48},
+number = {12},
+pages = {1598-1610},
+year = {1983},
+doi = {10.1190/1.1441442},
+
+URL = { 
+    
+        https://doi.org/10.1190/1.1441442
+    
+    
+
+}
+
+[2]Wu N, Li Y, Yang B. Noise attenuation for 2-D seismic data by radial-trace time-frequency peak filtering[J]. IEEE geoscience and remote sensing letters, 2011, 8(5): 874-878.10.1109/LGRS.2011.2129552
+
+[3]Cao Pengtao, Zhang Min, Li Zhenchun. An adaptive filtering denoising method based on generalized S-transform and Gaussian smoothing[J]. Oil Geophysical Prospecting, 2018, 53(6): 1128-1136,1187 https://doi.org/10.13810/j.cnki.issn.1000-7210.2018.06.002
+
+[4]Buades, A., Coll, B. & Morel, JM. Nonlocal Image and Movie Denoising. Int J Comput Vis 76, 123–139 (2008). https://doi.org/10.1007/s11263-007-0052-1
+
+[5]ZHANG Hua, DIAO Su, WEN Jianliang, HUANG Guangnan, ZHU Wenting, BAI Min. A random noise suppression with 2D non-uniform curvelet transform[J]. Oil Geophysical Prospecting, 2019, 54(1): 16-23 https://doi.org/10.13810/j.cnki.issn.1000-7210.2019.01.003
+
+[6]Xia Hongrui, Zhu Yong, Zhou Kaiming. Wavelet transform and its application to noise elimination[J]. Oil Geophysical Prospecting, 1994, 29(3): 274-285 DOI:10.13810/j.cnki.issn.1000-7210.1994/03/002
+
+[7]@ARTICLE{2003JGRB..108.2422P,
+       author = {{Pinnegar}, C. Robert and {Eaton}, David W.},
+        title = "{Application of the S transform to prestack noise attenuation filtering}",
+      journal = {Journal of Geophysical Research (Solid Earth)},
+         year = 2003,
+        month = sep,
+       volume = {108},
+       number = {B9},
+          eid = {2422},
+        pages = {2422},
+          doi = {10.1029/2002JB002258},
+}
+
+
+[8]LI Jiwei, ZANG Dianguang, DIAO Yongbo, ZHANG Lin, JIAN Shikai, SHI Yong. Combination of adaptive subtraction and Curvelet transform to suppress surface waves[J]. Oil Geophysical Prospecting, 2020, 55(5): 1005-1015 https://doi.org/10.13810/j.cnki.issn.1000-7210.2020.05.009
+
+[9]@inbook{doi:10.1190/1.2370116,
+author = {Sergey Fomel},
+title = {Towards the seislet transform},
+booktitle = {SEG Technical Program Expanded Abstracts 2006},
+chapter = {},
+pages = {2847-2851},
+year = {2006},
+doi = {10.1190/1.2370116},
+
+[10]LIU Yang, FOMEL Sergey, LIU Cai, WANG Dian, LIU Guo-Chang, FENG Xuan. High-order seislet transform and its application of random noise attenuation[J]. Chinese Journal of Geophysics (in Chinese), 2009, 52(8): 2142-2151, doi: 10.3969/j.issn.0001-5733.2009.08.024
+
+[11]@article{doi:10.1190/geo2014-0116.1,
+author = {Ke Chen and Mauricio D. Sacchi},
+title = {Robust reduced-rank filtering for erratic seismic noise attenuation},
+journal = {GEOPHYSICS},
+volume = {80},
+number = {1},
+pages = {V1-V11},
+year = {2015},
+doi = {10.1190/geo2014-0116.1},
+
+[12]CUI Yang, WANG Yannan, CHEN Wanli, ZHANG Hong, ZHU Dandan, BAI Min. Research progress of random noise attenuation methods for seismic data based on deep learning[J]. Oil Geophysical Prospecting, 2023, 58(5): 1269-1283 https://doi.org/10.13810/j.cnki.issn.1000-7210.2023.05.023
+
+[13]ZHANG Yan, ZHANG Yiming, DONG Hongli, SONG Liwei. An integrated method of seismic data reconstruction and denoising based on generative adversarial network[J]. Oil Geophysical Prospecting, 2024, 59(4): 714-723 https://doi.org/10.13810/j.cnki.issn.1000-7210.2024.04.008
+
+[14]@article{doi:10.1190/geo2018-0668.1,
+author = {Siwei Yu and Jianwei Ma and Wenlong Wang},
+title = {Deep learning for denoising},
+journal = {GEOPHYSICS},
+volume = {84},
+number = {6},
+pages = {V333-V350},
+year = {2019},
+doi = {10.1190/geo2018-0668.1},
+
+[15]@ARTICLE{7839189,
+  author={Zhang, Kai and Zuo, Wangmeng and Chen, Yunjin and Meng, Deyu and Zhang, Lei},
+  journal={IEEE Transactions on Image Processing}, 
+  title={Beyond a Gaussian Denoiser: Residual Learning of Deep CNN for Image Denoising}, 
+  year={2017},
+  volume={26},
+  number={7},
+  pages={3142-3155},
+  doi={10.1109/TIP.2017.2662206}}
+
+[16]@ARTICLE{9174797,
+  author={Chai, Xintao and Tang, Genyang and Wang, Shangxu and Lin, Kai and Peng, Ronghua},
+  journal={IEEE Transactions on Geoscience and Remote Sensing}, 
+  title={Deep Learning for Irregularly and Regularly Missing 3-D Data Reconstruction}, 
+  year={2021},
+  volume={59},
+  number={7},
+  pages={6244-6265},
+  doi={10.1109/TGRS.2020.3016343}}
+
+[17]OU BingLin, ZENG TongSheng, LIU TianCheng, GAO HaoTian, LI ZhongXiao, LI ZhenChun. 2023. Seismic data reconstruction and de-noising based on Huber-U-Net network. Progress in Geophysics, 38(6): 2540-2552. doi: 10.6038/pg2023GG0569
+
+[18]FAN Chengxiang, GUO Hongwei, YUAN Yijun. Abnormal amplitude suppression method based on denoising convolutional neural network[J]. Oil Geophysical Prospecting, 2023, 58(4): 780-788 https://doi.org/10.13810/j.cnki.issn.1000-7210.2023.04.003
+
+[19]CAO Jingjie, GAO Kangfu, XU Yinpo, WANG Naijian, ZHANG Chun, ZHU Yuefei. Seismic data de-noising method based on an attention mechanism U-Net[J]. Oil Geophysical Prospecting, 2024, 59(4): 724-735 https://doi.org/10.13810/j.cnki.issn.1000-7210.2024.04.011
+
+[20]WU Guoning, YU Mengmeng, WANG Junxian, LIU Guochang. Seismic random noise attenuation based on stationary wavelet transform and deep residual neural network[J]. Oil Geophysical Prospecting, 2022, 57(1): 43-51 https://doi.org/10.13810/j.cnki.issn.1000-7210.2022.01.005
+
+[21]@article{10.5555/1756006.1953039,
+author = {Vincent, Pascal and Larochelle, Hugo and Lajoie, Isabelle and Bengio, Yoshua and Manzagol, Pierre-Antoine},
+title = {Stacked Denoising Autoencoders: Learning Useful Representations in a Deep Network with a Local Denoising Criterion},
+year = {2010},
+issue_date = {3/1/2010},
+publisher = {JMLR.org},
+volume = {11},
+issn = {1532-4435},
+journal = {J. Mach. Learn. Res.},
+month = dec,
+pages = {3371–3408},
+numpages = {38},
+doi={10.1016/j.mechatronics.2010.09.004}
+}
+
+[22]@INPROCEEDINGS{8579082,
+  author={Lempitsky, Victor and Vedaldi, Andrea and Ulyanov, Dmitry},
+  booktitle={2018 IEEE/CVF Conference on Computer Vision and Pattern Recognition}, 
+  title={Deep Image Prior}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={9446-9454},
+  keywords={Image restoration;Image resolution;Noise reduction;Task analysis;Optimization;Generators;Image reconstruction},
+  doi={10.1109/CVPR.2018.00984}}
+
+
+[23]WANG Jing, CHEN Rui, MA Xiaoqin, WU Bangyu. Unsupervised seismic data random noise suppression method based on weighted total variation regularization and ADMM solution[J]. Oil Geophysical Prospecting, 2023, 58(4): 766-779,800 https://doi.org/10.13810/j.cnki.issn.1000-7210.2023.04.005
+
+[24]Shijun Cheng, Zhiyao Cheng, Chao Jiang, Weijian Mao, Qingchen Zhang; An effective self-supervised learning method for attenuating various types of seismic noise. Geophysics 2024;; 89 (6): V589–V604. doi: https://doi.org/10.1190/geo2023-0656.1
+
+[25]Ronneberger, O., Fischer, P., Brox, T. (2015). U-Net: Convolutional Networks for Biomedical Image Segmentation. In: Navab, N., Hornegger, J., Wells, W., Frangi, A. (eds) Medical Image Computing and Computer-Assisted Intervention – MICCAI 2015. MICCAI 2015. Lecture Notes in Computer Science(), vol 9351. Springer, Cham. https://doi.org/10.1007/978-3-319-24574-4_28
+
+[26]@ARTICLE{8932614,
+  author={Zhou, Zongwei and Siddiquee, Md Mahfuzur Rahman and Tajbakhsh, Nima and Liang, Jianming},
+  journal={IEEE Transactions on Medical Imaging}, 
+  title={UNet++: Redesigning Skip Connections to Exploit Multiscale Features in Image Segmentation}, 
+  year={2020},
+  volume={39},
+  number={6},
+  pages={1856-1867},
+  doi={10.1109/TMI.2019.2959609}}
+
+[27]@INPROCEEDINGS{9053405,
+  author={Huang, Huimin and Lin, Lanfen and Tong, Ruofeng and Hu, Hongjie and Zhang, Qiaowei and Iwamoto, Yutaro and Han, Xianhua and Chen, Yen-Wei and Wu, Jian},
+  booktitle={ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+  title={UNet 3+: A Full-Scale Connected UNet for Medical Image Segmentation}, 
+  year={2020},
+  volume={},
+  number={},
+  pages={1055-1059},
+  doi={10.1109/ICASSP40776.2020.9053405}}
+
+[28]@inbook{doi:10.1190/1.1817083,
+author = {Gary S. Martin and Kurt J. Marfurt and Shawn Larsen},
+title = {Marmousi‐2: An updated model for the investigation of AVO in structurally complex areas},
+booktitle = {SEG Technical Program Expanded Abstracts 2002},
+chapter = {},
+pages = {1979-1982},
+year = {2005},
+doi = {10.1190/1.1817083},
+
+[29]@article{https://doi.org/10.1029/2007JB005392,
+author = {Hornbach, Matthew J. and Saffer, Demian M. and Holbrook, W. Steven and Van Avendonk, Harm J. A. and Gorman, Andrew R.},
+title = {Three-dimensional seismic imaging of the Blake Ridge methane hydrate province: Evidence for large, concentrated zones of gas hydrate and morphologically driven advection},
+journal = {Journal of Geophysical Research: Solid Earth},
+volume = {113},
+number = {B7},
+pages = {},
+keywords = {hydrate, 3-D, Blake Ridge},
+doi = {https://doi.org/10.1029/2007JB005392},
+year = {2008}
+}
+
+
+[30]@article{TAN2023105095,
+title = {Method for seismic signal denoising based on generalized S-transform and nonlinear complex diffusion},
+journal = {Journal of Applied Geophysics},
+volume = {215},
+pages = {105095},
+year = {2023},
+issn = {0926-9851},
+doi = {https://doi.org/10.1016/j.jappgeo.2023.105095},
+url = {https://www.sciencedirect.com/science/article/pii/S0926985123001738},
+author = {Minjia Tan and Qizhou Hu and Susumu Ohno},
+
+
+[31]@Article{s23020577,
+AUTHOR = {Bayati, Farzaneh and Trad, Daniel},
+TITLE = {3-D Data Interpolation and Denoising by an Adaptive Weighting Rank-Reduction Method Using Multichannel Singular Spectrum Analysis Algorithm},
+JOURNAL = {Sensors},
+VOLUME = {23},
+YEAR = {2023},
+NUMBER = {2},
+ARTICLE-NUMBER = {577},
+PubMedID = {36679379},
+ISSN = {1424-8220},
+DOI = {10.3390/s23020577}
+}
+
+[32]@article{10.1190/geo2024-0310.1,
+    author = {Liu, Yulin and Lin, Peng and Peng, Suping and Cui, Xiaoqin},
+    title = {Weighted multichannel singular spectrum analysis for diffraction amplitude preservation},
+    journal = {Geophysics},
+    volume = {90},
+    number = {3},
+    pages = {V191-V203},
+    year = {2025},
+    month = {03},
+    issn = {0016-8033},
+    doi = {10.1190/geo2024-0310.1},
+}
+
+[33]@article{GAO2024105307,
+title = {Unsupervised denoising for seismic data with complementary mask blind spot strategy},
+journal = {Journal of Applied Geophysics},
+volume = {221},
+pages = {105307},
+year = {2024},
+issn = {0926-9851},
+doi = {https://doi.org/10.1016/j.jappgeo.2024.105307},
+url = {https://www.sciencedirect.com/science/article/pii/S0926985124000235},
+author = {Lei Gao and Dongsheng Liang and Fan Min},
+
+
+
+
+[34]@article{SHAN2009103,
+title = {Comparisons of wavelets, contourlets and curvelets in seismic denoising},
+journal = {Journal of Applied Geophysics},
+volume = {69},
+number = {2},
+pages = {103-115},
+year = {2009},
+issn = {0926-9851},
+doi = {https://doi.org/10.1016/j.jappgeo.2009.08.002},
+url = {https://www.sciencedirect.com/science/article/pii/S0926985109001050},
+author = {Hao Shan and Jianwei Ma and Huizhu Yang},
+}
+
+[35]@article{https://doi.org/10.1111/1365-2478.12899,
+author = {Wang, Chong and Zhu, Zhihui and Gu, Hanming},
+title = {Low-rank seismic denoising with optimal rank selection for hankel matrices},
+journal = {Geophysical Prospecting},
+volume = {68},
+number = {3},
+pages = {892-909},
+keywords = {Noise, Signal processing},
+doi = {https://doi.org/10.1111/1365-2478.12899},
+year = {2020}
+}
+
+
+[37]@article{https://doi.org/10.1111/1365-2478.13504,
+author = {Yang, Jie Fei and Luo, Xia and Liu, Dezhi and Gu, Hanming and Sun, Ming},
+title = {Seismic noise attenuation method based on low-rank adaptive symplectic geometry decomposition},
+journal = {Geophysical Prospecting},
+volume = {72},
+number = {6},
+pages = {2148-2163},
+keywords = {noise, signal processing},
+doi = {https://doi.org/10.1111/1365-2478.13504},
+year = {2024}
+}
