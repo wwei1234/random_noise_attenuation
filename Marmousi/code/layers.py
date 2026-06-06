@@ -27,7 +27,6 @@ class unetConv2(nn.Module):
                 setattr(self, 'conv%d' % i, conv)
                 in_size = out_size
 
-        # initialise the blocks
         for m in self.children():
             init_weights(m, init_type='kaiming')
 
@@ -42,21 +41,17 @@ class unetConv2(nn.Module):
 class unetUp(nn.Module):
     def __init__(self, in_size, out_size, is_deconv, n_concat=2):
         super(unetUp, self).__init__()
-        # self.conv = unetConv2(in_size + (n_concat - 2) * out_size, out_size, False)
         self.conv = unetConv2(out_size*2, out_size, False)
         if is_deconv:
             self.up = nn.ConvTranspose2d(in_size, out_size, kernel_size=4, stride=2, padding=1)
         else:
             self.up = nn.UpsamplingBilinear2d(scale_factor=2)
 
-        # initialise the blocks
         for m in self.children():
             if m.__class__.__name__.find('unetConv2') != -1: continue
             init_weights(m, init_type='kaiming')
 
     def forward(self, inputs0, *input):
-        # print(self.n_concat)
-        # print(input)
         outputs0 = self.up(inputs0)
         for i in range(len(input)):
             outputs0 = torch.cat([outputs0, input[i]], 1)
@@ -65,7 +60,6 @@ class unetUp(nn.Module):
 class unetUp_origin(nn.Module):
     def __init__(self, in_size, out_size, is_deconv, n_concat=2):
         super(unetUp_origin, self).__init__()
-        # self.conv = unetConv2(out_size*2, out_size, False)
         if is_deconv:
             self.conv = unetConv2(in_size + (n_concat - 2) * out_size, out_size, False)
             self.up = nn.ConvTranspose2d(in_size, out_size, kernel_size=4, stride=2, padding=1)
@@ -73,14 +67,11 @@ class unetUp_origin(nn.Module):
             self.conv = unetConv2(in_size + (n_concat - 2) * out_size, out_size, False)
             self.up = nn.UpsamplingBilinear2d(scale_factor=2)
 
-        # initialise the blocks
         for m in self.children():
             if m.__class__.__name__.find('unetConv2') != -1: continue
             init_weights(m, init_type='kaiming')
 
     def forward(self, inputs0, *input):
-        # print(self.n_concat)
-        # print(input)
         outputs0 = self.up(inputs0)
         for i in range(len(input)):
             outputs0 = torch.cat([outputs0, input[i]], 1)

@@ -1,141 +1,139 @@
 import os
+
 import numpy as np
-import segyio
-import matplotlib.pyplot as plt
-from numpy.lib.stride_tricks import as_strided
 import scipy.signal as signal
-                            
-# 读取SEGY数据
+import segyio
+from numpy.lib.stride_tricks import as_strided
+
+
+SEGY_FILE = r"D:\桌面\U_Net3\DATA\SYNTHETIC_time.segy"
+OUTPUT_DIR = "数据集(整个剖面)"
+
+SHOT_NUM = 1
+MARMOUISI_TIME_SLICE = slice(100, 750)
+SLICE_SIZE = 128
+STRIDE = 32
+START_INDEX = 2788
+LOW_CUT = 15
+HIGH_CUT = 55
+DT = 0.004
+FILTER_ORDER = 4
+NOISE_SCALE_K = 1
+
+NORMALIZED_DIR_NAME = "normalized_npy"
+NOISY_DIR_NAME = "noisy_npy"
+NOISE_DIR_NAME = "noise_npy"
+
+
 def read_segy(data_dir, shotnum=0):
     with segyio.open(data_dir, 'r', ignore_geometry=True) as f:
-        sourceX = f.attributes(segyio.TraceField.SourceX)[:]
-        trace_num = len(sourceX)  # 所有道的数量
-        if shotnum:
-            shot_num = shotnum
-        else:
-            shot_num = len(set(sourceX))  # 记录数
-        len_shot = trace_num // shot_num  # 每个shot的数据长度
+        source_x = f.attributes(segyio.TraceField.SourceX)[:]
+        trace_num = len(source_x)
+        shot_num = shotnum if shotnum else len(set(source_x))
+        len_shot = trace_num // shot_num
         time = f.trace[0].shape[0]
-        print('start read segy data') 
+        print('start read segy data')
+
         data = np.zeros((shot_num, time, len_shot))
-        for j in range(0, shot_num):
+        for j in range(shot_num):
             data[j, :, :] = np.asarray([np.copy(x) for x in f.trace[j * len_shot:(j + 1) * len_shot]]).T
         return data
 
-# 归一化处理
+
 def normalize_data(data):
     min_val = data.min()
     max_val = data.max()
     return (data - min_val) / (max_val - min_val)
 
-def filter_data(data, lowcut, highcut):
-    dt = 0.004  # 采样时间间隔（秒），请根据实际情况修改
-    # 计算 Nyquist 频率（奈奎斯特频率 = 采样率的一半）
-    nyquist = 0.5 / dt  
-    # 归一化截止频率（相对于 Nyquist 频率）
+
+def filter_data(data, lowcut, highcut, dt=DT, order=FILTER_ORDER):
+    nyquist = 0.5 / dt
     low = lowcut / nyquist
     high = highcut / nyquist
-    # 设计 4 阶 Butterworth 带通滤波器
-    b, a = signal.butter(N=4, Wn=[low, high], btype='band', analog=False)
-    filtered_data = signal.filtfilt(b, a, data, axis=0)
-    return filtered_data
+    b, a = signal.butter(N=order, Wn=[low, high], btype='band', analog=False)
+    return signal.filtfilt(b, a, data, axis=0)
 
-# 为数据添加噪声
+
 def add_noise(data, std_dev, k, lowcut, highcut):
-    noise = np.random.randn(*data.shape) * (std_dev * k)  # 生成噪声，标准差为 std_dev * k
+    noise = np.random.randn(*data.shape) * (std_dev * k)
     noise = filter_data(noise, lowcut, highcut)
     return data + noise
 
-# 从 SEGY 数据中提取多个 128x128 的切片
-def process_data(data, slice_size=512, stride=16):
+
+def process_data(data, slice_size=SLICE_SIZE, stride=STRIDE):
     time, trace_len = data.shape
-    shape = (time - slice_size) // stride + 1, (trace_len - slice_size) // stride + 1, slice_size, slice_size
-    strides = data.strides[0] * stride, data.strides[1] * stride, data.strides[0], data.strides[1]
-    # 使用 as_strided 生成切片
+    shape = (
+        (time - slice_size) // stride + 1,
+        (trace_len - slice_size) // stride + 1,
+        slice_size,
+        slice_size,
+    )
+    strides = (
+        data.strides[0] * stride,
+        data.strides[1] * stride,
+        data.strides[0],
+        data.strides[1],
+    )
     slices = as_strided(data, shape=shape, strides=strides)
-    # 返回切片的二维数组，形状为 (num_slices, slice_size, slice_size)
     return slices.reshape(-1, slice_size, slice_size)
 
-# 图像旋转和翻转
+
 def augment_image(data):
-    augmented_images = []
-    # 水平翻转
-    augmented_images.append(np.fliplr(data))
-    # 垂直翻转
-    augmented_images.append(np.flipud(data))
-    # 旋转 90°
-    augmented_images.append(np.rot90(data, k=1))
-    # 旋转 180°
-    augmented_images.append(np.rot90(data, k=2))
-    # 旋转 270°
-    augmented_images.append(np.rot90(data, k=3))
-    return augmented_images
-
-# 主程序
-segyfile = r"D:\桌面\U_Net3\DATA\SYNTHETIC_time.segy"
-output_dir = "数据集(整个剖面)"
-
-# 创建文件夹存储结果
-os.makedirs(output_dir, exist_ok=True)
-# 创建六个子文件夹分别保存噪声、归一化前后数据
-npy_dir_norm = os.path.join(output_dir, "normalized_npy")
-npy_dir_noisy = os.path.join(output_dir, "noisy_npy")
-npy_dir_noise = os.path.join(output_dir, "noise_npy")
-
- 
-# 创建所有文件夹
-os.makedirs(npy_dir_norm, exist_ok=True)
-os.makedirs(npy_dir_noisy, exist_ok=True)
-os.makedirs(npy_dir_noise, exist_ok=True)
+    return [
+        np.fliplr(data),
+        np.flipud(data),
+        np.rot90(data, k=1),
+        np.rot90(data, k=2),
+        np.rot90(data, k=3),
+    ]
 
 
-# 读取SEGY数据
-marmousi = read_segy(segyfile, shotnum=1)
-# 去除第一个维度，得到 (701, 2721)
-marmousi = marmousi[0][100:750]
+def create_output_dirs(output_dir):
+    npy_dir_norm = os.path.join(output_dir, NORMALIZED_DIR_NAME)
+    npy_dir_noisy = os.path.join(output_dir, NOISY_DIR_NAME)
+    npy_dir_noise = os.path.join(output_dir, NOISE_DIR_NAME)
 
-# 裁剪成多个 128x128 的切片
-slices = process_data(marmousi, slice_size=128, stride=32)
+    os.makedirs(npy_dir_norm, exist_ok=True)
+    os.makedirs(npy_dir_noisy, exist_ok=True)
+    os.makedirs(npy_dir_noise, exist_ok=True)
+    return npy_dir_norm, npy_dir_noisy, npy_dir_noise
 
-low_cut = 15
-high_cut = 55
-start = 2788
-k = 1
 
-for idx, slice_data in enumerate(slices):
-    file_idx = str(idx + start).zfill(4)
-
-    # 0-1 归一化
+def save_slice(slice_data, file_idx, output_dirs):
+    npy_dir_norm, npy_dir_noisy, npy_dir_noise = output_dirs
     normalized_slice = normalize_data(slice_data)
-    
-    # 当前切片的标准差（未归一化前）
     local_std = slice_data.std()
-    
-    # 加噪声（用当前切片自身的 std）
-    noisy_slice = add_noise(normalized_slice, local_std, k, low_cut, high_cut)
-    
-    # 计算噪声部分
+    noisy_slice = add_noise(normalized_slice, local_std, NOISE_SCALE_K, LOW_CUT, HIGH_CUT)
     noise_data = noisy_slice - normalized_slice
 
-    # 保存原始切片的归一化、加噪声及噪声切片
     np.save(os.path.join(npy_dir_norm, f"normalized_{file_idx}.npy"), normalized_slice)
     np.save(os.path.join(npy_dir_noisy, f"noisy_{file_idx}.npy"), noisy_slice)
     np.save(os.path.join(npy_dir_noise, f"noise_{file_idx}.npy"), noise_data)
 
-    # 增强后的切片
-    augmented_slices = augment_image(slice_data)
-    for i, aug_slice in enumerate(augmented_slices):
-        aug_file_idx = f"{file_idx}_{i+1}"
 
-        normalized_aug_slice = normalize_data(aug_slice)
-        local_aug_std = aug_slice.std()
+def process_and_save_slices(slices, output_dirs):
+    for idx, slice_data in enumerate(slices):
+        file_idx = str(idx + START_INDEX).zfill(4)
+        save_slice(slice_data, file_idx, output_dirs)
 
-        noisy_aug_slice = add_noise(normalized_aug_slice, local_aug_std, k, low_cut, high_cut)
-        noise_aug_data = noisy_aug_slice - normalized_aug_slice
+        for i, aug_slice in enumerate(augment_image(slice_data)):
+            aug_file_idx = f"{file_idx}_{i + 1}"
+            save_slice(aug_slice, aug_file_idx, output_dirs)
 
-        np.save(os.path.join(npy_dir_norm, f"normalized_{aug_file_idx}.npy"), normalized_aug_slice)
-        np.save(os.path.join(npy_dir_noisy, f"noisy_{aug_file_idx}.npy"), noisy_aug_slice)
-        np.save(os.path.join(npy_dir_noise, f"noise_{aug_file_idx}.npy"), noise_aug_data)
+        print(f"slice group {idx} saved")
 
-    print(f"第{idx}组已保存")
-print("所有文件已保存至:", output_dir)
+
+def main():
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    output_dirs = create_output_dirs(OUTPUT_DIR)
+
+    marmousi = read_segy(SEGY_FILE, shotnum=SHOT_NUM)
+    marmousi = marmousi[0][MARMOUISI_TIME_SLICE]
+    slices = process_data(marmousi, slice_size=SLICE_SIZE, stride=STRIDE)
+
+    process_and_save_slices(slices, output_dirs)
+    print("all files saved to", OUTPUT_DIR)
+
+
+if __name__ == "__main__":
+    main()
