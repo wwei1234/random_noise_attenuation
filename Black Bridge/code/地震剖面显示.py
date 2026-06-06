@@ -3,6 +3,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import torch
 
+SEGYFILE = r"D:\桌面\项目\raw_data\data\Stack_final.sgy"
+
+# np.save(r"D:\桌面\项目\Stratton\数据汇总\Black Bridge\实际地震剖面", marmousi)
+# plt.colorbar()
+# plt.savefig(r"D:\桌面\项目\raw_data\可视化\实际地震记录", dpi =600, bbox_inches='tight')
+# input = torch.tensor(marmousi, dtype=torch.float32)
+
 def read_segy_as_data(segyfile):
     with segyio.open(segyfile, "r", ignore_geometry=True) as sgy:
         sgy.mmap()
@@ -70,27 +77,17 @@ def normalize_data(data):
     max_val = data.max()
     return (data - min_val) / (max_val - min_val)
 
-segyfile = r"D:\桌面\项目\raw_data\data\Stack_final.sgy"
-marmousi = read_segy(segyfile)
-print(marmousi.shape)
-# marmousi = marmousi[50][400:912,500:1012]
-# marmousi = marmousi[50][150:662,150:662]
-marmousi = marmousi[50][0:1000, 450:]
-marmousi = marmousi.astype(np.float64)
-# marmousi = normalize_data(marmousi)
-print(marmousi.shape)
-
-# np.save(r"D:\桌面\项目\Stratton\数据汇总\Black Bridge\实际地震剖面", marmousi)
-plt.figure(figsize=(15,9))
-plt.imshow(marmousi, cmap='seismic')
-# plt.colorbar()
-plt.clim(-6, 6)
-# plt.savefig(r"D:\桌面\项目\raw_data\可视化\实际地震记录", dpi =600, bbox_inches='tight')
-plt.show()
-# input = torch.tensor(marmousi, dtype=torch.float32)
-# print(input.shape)
+def main():
+    marmousi = read_segy(SEGYFILE)
+    print(marmousi.shape)
+    marmousi = marmousi[50][0:1000, 450:]
+    marmousi = marmousi.astype(np.float64)
+    print(marmousi.shape)
+    plt.figure(figsize=(15,9))
+    plt.imshow(marmousi, cmap='seismic')
+    plt.clim(-6, 6)
+    plt.show()
 
 
-
-
-
+if __name__ == "__main__":
+    main()

@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 import scipy.signal as signal
-rcParams['font.sans-serif'] = ['SimHei']  # 或者 'Microsoft YaHei'
-rcParams['axes.unicode_minus'] = False  # 防止负号显示为方块
+
+# clean = np.load(r"D:\桌面\实际地震数据\实测数据\modified_SN03.npy")
+# np.save(r"D:\桌面\实际数据去噪\test\001_0_clean.npy", noised)
 
 def calculate_snr(predictions, targets):
     noise = predictions - targets
@@ -28,33 +29,33 @@ def add_noise(data, std_dev, k):
     # noise = filter_data(noise)
     return data + noise, noise
 
-clean = np.load(r"D:\桌面\实际数据去噪\data\clean\001_0.npy")
-# clean = np.load(r"D:\桌面\实际地震数据\实测数据\modified_SN03.npy")
+def main():
+    rcParams['font.sans-serif'] = ['SimHei']  # 或者 'Microsoft YaHei'
+    rcParams['axes.unicode_minus'] = False  # 防止负号显示为方块
+    clean = np.load(r"D:\桌面\实际数据去噪\data\clean\001_0.npy")
+    std = np.std(clean)
+    print(std)
+    noised, noise = add_noise(clean, std_dev = std, k=0.5)
+    snr = calculate_snr(noised, clean)
+    print(snr)
+    plt.figure()
+    plt.subplot(1, 3, 1)
+    plt.title('干净数据')
+    plt.imshow(clean, aspect='equal', cmap='seismic', extent=(0, 512, 512, 0))
+    plt.colorbar(label='Amplitude (VDD)')
+    plt.ylabel('Samples')
+    plt.subplot(1, 3, 2)
+    plt.title('含噪数据')
+    plt.imshow(noised, aspect='equal', cmap='seismic', extent=(0, 512, 512, 0))
+    plt.colorbar(label='Amplitude (VDD)')
+    plt.ylabel('Samples')
+    plt.subplot(1, 3, 3)
+    plt.title('含噪数据')
+    plt.imshow(noise, aspect='equal', cmap='seismic', extent=(0, 512, 512, 0))
+    plt.colorbar(label='Amplitude (VDD)')
+    plt.ylabel('Samples')
+    plt.show()
 
-std = np.std(clean)
-print(std)
 
-noised, noise = add_noise(clean, std_dev = std, k=0.5)
-snr = calculate_snr(noised, clean)
-print(snr)
-
-# np.save(r"D:\桌面\实际数据去噪\test\001_0_clean.npy", noised)
-plt.figure()
-plt.subplot(1, 3, 1)
-plt.title('干净数据')
-plt.imshow(clean, aspect='equal', cmap='seismic', extent=(0, 512, 512, 0))
-plt.colorbar(label='Amplitude (VDD)')
-plt.ylabel('Samples')
-
-plt.subplot(1, 3, 2)
-plt.title('含噪数据')
-plt.imshow(noised, aspect='equal', cmap='seismic', extent=(0, 512, 512, 0))
-plt.colorbar(label='Amplitude (VDD)')
-plt.ylabel('Samples')
-
-plt.subplot(1, 3, 3)
-plt.title('含噪数据')
-plt.imshow(noise, aspect='equal', cmap='seismic', extent=(0, 512, 512, 0))
-plt.colorbar(label='Amplitude (VDD)')
-plt.ylabel('Samples')
-plt.show()
+if __name__ == "__main__":
+    main()

@@ -7,38 +7,15 @@ from matplotlib import rcParams
 import segyio
 from skimage.metrics import structural_similarity as ssim
 
-rcParams['font.sans-serif'] = ['SimHei']  # 或者 'Microsoft YaHei'
-rcParams['axes.unicode_minus'] = False  # 防止负号显示为方块
+#     noise = predictions - targets
+#         noise_power = np.var(noise)
+#         noise_power = np.mean(noise**2)
 
-# 计算信噪比（SNR）
 def calculate_snr(predictions, targets):
     noise = predictions - targets
     signal_power = np.mean(targets**2)
     noise_power = np.mean(noise**2)
     return 10 * np.log10(signal_power / noise_power)
-
-# def calculate_snr(predictions, targets, use_variance=True):
-#     predictions = np.asarray(predictions)
-#     targets = np.asarray(targets)
-#     noise = predictions - targets
-    
-#     if use_variance:
-#         signal_power = np.var(targets)
-#         noise_power = np.var(noise)
-#     else:
-#         signal_power = np.mean(targets**2)
-#         noise_power = np.mean(noise**2)
-    
-#     # 避免除以零
-#     epsilon = 1e-10
-#     if noise_power == 0:
-#         if signal_power == 0:
-#             return 0.0  # 信号和噪声均为零，定义SNR为0
-#         else:
-#             return np.inf  # 无噪声，SNR无穷大
-    
-#     snr = 10 * np.log10(signal_power / noise_power)
-#     return snr
 
 def mse(x, y):
     return np.mean((x - y) ** 2)
@@ -50,12 +27,18 @@ def psnr(x, y, max_value=1.0):
         return float('inf')  # 完全相同的数据，PSNR 为无穷大
     return 10 * np.log10((max_value ** 2) / mse_value)
 
-result = np.load(r"D:\桌面\项目\raw_data\data\svd_denoised_(k=2).npy")
-pure = np.load(r"D:\桌面\项目\raw_data\data\clean.npy")
+def main():
+    rcParams['font.sans-serif'] = ['SimHei']  # 或者 'Microsoft YaHei'
+    rcParams['axes.unicode_minus'] = False  # 防止负号显示为方块
+    result = np.load(r"D:\桌面\项目\raw_data\data\svd_denoised_(k=2).npy")
+    pure = np.load(r"D:\桌面\项目\raw_data\data\clean.npy")
+    data_range = result.max() - result.min()
+    Mse = mse(result, pure)
+    Ssim = ssim(result, pure, full = False, data_range=data_range)
+    Snr = calculate_snr(result, pure)
+    Psnr = psnr(result, pure)
+    print("MSE:", Mse, "\n","SSIM:", Ssim, "\n", "SNR:", Snr, "\n","PSNR:", Psnr)
 
-data_range = result.max() - result.min()
-Mse = mse(result, pure)
-Ssim = ssim(result, pure, full = False, data_range=data_range)
-Snr = calculate_snr(result, pure)
-Psnr = psnr(result, pure)
-print("MSE:", Mse, "\n","SSIM:", Ssim, "\n", "SNR:", Snr, "\n","PSNR:", Psnr)
+
+if __name__ == "__main__":
+    main()

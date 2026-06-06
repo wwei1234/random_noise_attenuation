@@ -2,6 +2,12 @@ import os
 import numpy as np
 import segyio
 
+INPUT_FOLDER = r"D:\桌面\Front end express 转化后"       # 输入SGY文件夹
+OUTPUT_FOLDER = r"D:\桌面\实际数据去噪\data2\clean3"     # 输出npy保存文件夹
+
+# 输入SGY文件夹
+# 输出npy保存文件夹
+
 def read_segy(data_dir, shotnum=0):
     with segyio.open(data_dir, 'r', ignore_geometry=True) as f:
         sourceX = f.attributes(segyio.TraceField.SourceX)[:]
@@ -15,7 +21,6 @@ def read_segy(data_dir, shotnum=0):
             data[j, :, :] = np.asarray([np.copy(x) for x in f.trace[j * len_shot:(j + 1) * len_shot]]).T
         return data
 
-# 归一化
 def normalize_data(data):
     min_val = data.min()
     max_val = data.max()
@@ -23,7 +28,6 @@ def normalize_data(data):
         return np.zeros_like(data)
     return (data - min_val) / (max_val - min_val)
 
-# 批量处理函数（增强：原始+LR+UD+ROT）
 def batch_augment_and_save(input_dir, output_dir):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -62,8 +66,9 @@ def batch_augment_and_save(input_dir, output_dir):
             except Exception as e:
                 print(f"Failed to process {filename}: {e}")
 
-# 执行路径设置
-input_folder = r"D:\桌面\Front end express 转化后"       # 输入SGY文件夹
-output_folder = r"D:\桌面\实际数据去噪\data2\clean3"     # 输出npy保存文件夹
+def main():
+    batch_augment_and_save(INPUT_FOLDER, OUTPUT_FOLDER)
 
-batch_augment_and_save(input_folder, output_folder)
+
+if __name__ == "__main__":
+    main()

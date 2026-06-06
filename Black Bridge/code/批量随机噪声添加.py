@@ -1,7 +1,10 @@
 import os
 import numpy as np
 import scipy.signal as signal
-# 加噪函数（不再进行滤波）
+
+INPUT_DIR = r"D:\桌面\实际数据去噪\data2\clean3"  # 输入文件夹路径
+OUTPUT_DIR = r"D:\桌面\实际数据去噪\data2\noised"  # 输出文件夹路径
+
 def add_noise(data, std_dev, k):
     noise = np.random.randn(*data.shape) * (std_dev * k)
     # noise = filter_data(noise, lowcut, highcut)
@@ -19,7 +22,6 @@ def filter_data(data, lowcut, highcut):
     filtered_data = signal.filtfilt(b, a, data, axis=0)
     return filtered_data
 
-# 批量加噪主函数
 def batch_add_noise(input_dir, output_dir, k=1):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -43,8 +45,9 @@ def batch_add_noise(input_dir, output_dir, k=1):
             except Exception as e:
                 print(f"Error processing {filename}: {e}")
 
-# 设置路径并执行
-input_dir = r"D:\桌面\实际数据去噪\data2\clean3"  # 输入文件夹路径
-output_dir = r"D:\桌面\实际数据去噪\data2\noised"  # 输出文件夹路径
+def main():
+    batch_add_noise(INPUT_DIR, OUTPUT_DIR, k=2)
 
-batch_add_noise(input_dir, output_dir, k=2)
+
+if __name__ == "__main__":
+    main()

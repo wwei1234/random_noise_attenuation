@@ -2,8 +2,6 @@ import numpy as np
 from scipy.linalg import svd
 import matplotlib
 import matplotlib.pyplot as plt
-matplotlib.rcParams['font.sans-serif'] = ['SimHei']  # 设置字体为黑体
-matplotlib.rcParams['axes.unicode_minus'] = False   # 解决负号显示问题
 
 def calculate_snr(original: np.ndarray, denoised: np.ndarray) -> float:
     """
@@ -113,8 +111,9 @@ def dmssa_denoise_columns(
     denoised = np.fft.ifft(F_denoised, axis=0).real
     return denoised
 
-# ===========================
-if __name__ == "__main__":
+def main():
+    matplotlib.rcParams['font.sans-serif'] = ['SimHei']  # 设置字体为黑体
+    matplotlib.rcParams['axes.unicode_minus'] = False   # 解决负号显示问题
     # 例：读取 NumPy 格式地震数据，shape = (512,512)，每列是一条地震道
     clean = np.load(r"D:\桌面\raw_data\data\clean.npy")  # 原始数据
     raw = np.load(r"D:\桌面\raw_data\data\noised(k=3)(15-55).npy")   
@@ -145,3 +144,7 @@ if __name__ == "__main__":
 
     plt.tight_layout()
     plt.show()
+
+
+if __name__ == "__main__":
+    main()

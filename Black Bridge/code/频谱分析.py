@@ -2,8 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 import scipy.signal as signal
-rcParams['font.sans-serif'] = ['SimHei']  # 或者 'Microsoft YaHei'
-rcParams['axes.unicode_minus'] = False  # 防止负号显示为方块
+
+# data = filter_data(data, 5, 60)
+# data = np.load(r"D:\桌面\实际数据去噪\test\001_0_clean.npy")
 
 def filter_data(data, lowcut, highcut):
     dt = 0.000025 #采样时间间隔（秒），请根据实际情况修改
@@ -46,10 +47,12 @@ def plot_spectrum(data, dt=0.025):
     plt.grid()
     plt.show()
 
-data = np.load(r"D:\桌面\实际地震数据\实测数据\modified_SN04.npy")
-# data = filter_data(data, 5, 60)
-# data = np.load(r"D:\桌面\实际数据去噪\test\001_0_clean.npy")
-plot_spectrum(data, dt=0.004)
+def main():
+    rcParams['font.sans-serif'] = ['SimHei']  # 或者 'Microsoft YaHei'
+    rcParams['axes.unicode_minus'] = False  # 防止负号显示为方块
+    data = np.load(r"D:\桌面\实际地震数据\实测数据\modified_SN04.npy")
+    plot_spectrum(data, dt=0.004)
 
 
-
+if __name__ == "__main__":
+    main()
